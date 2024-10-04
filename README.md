@@ -11,4 +11,3 @@ Need a themed color
 1.#151750
 2.#C2CBF8
 What all features are there: how different are from competition
-  ameen
