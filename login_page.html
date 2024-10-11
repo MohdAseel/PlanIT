@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="login_page.css">
+    <link href="https://fonts.googleapis.com/css2?family=Peace+Sans&family=Glacial+Indifference&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="login_page.css">
+    <title>PlanIT_login</title>
 </head>
 <body>
-    <p>PLANIT</p>
-    
-    <div>
-        <label>LOGIN</label>
+
+<div class="header-login-container">
+    <div class="page-header">`
+        <h1 class="main-heading">PLANIT</h1>
+        <p class="tagline">From Deadlines to Socials, We’ve Got <br>You Covered</p>
     </div>
+
+    <div class="login-container">
+        <fieldset>
+            <label class="login-header">Login</label>
+
+            <label for="username" class="right-align"><b>User email:</b></label>
+            <input type="text" id="username" name="username" placeholder="rollno@smail.iitm.ac.in">
+
+            <label for="password" class="right-align"><b>Password:</b></label>
+            <input type="password" id="password" name="password" placeholder="password">
+
+            <input type="submit" value="Login">
+        </fieldset>
+    </div>
+</div>
+
 </body>
 </html>
+
+
+
