@@ -8,7 +8,7 @@ body {
     background-image: url("C:/Users/ameen/OneDrive/Desktop/PlanIT/PlanIT/photos/background design login page.png");
     background-size: cover;
     background-position: center;
-    font-family: 'Glacial Indifference', sans-serif; /* Normal text font */
+    font-family: sans-serif;
 }
 
 .header-login-container {
@@ -27,14 +27,14 @@ body {
     font-size: 75px; /* Larger font size for "PLANIT" */
     color: white;
     font-weight: bold;
-    margin: 0;
+    margin-right: 250px;
     font-family: 'Peace Sans', sans-serif; /* Heading font */
 }
 
 .tagline {
     font-size: 18px; /* Smaller font size for the tagline */
     color: white;
-    margin: 5px 0 30px 0; /* Adjust spacing below tagline */
+    margin: 0 250px 30px 0; /* Adjust spacing below tagline */
 }
 
 .login-container {
@@ -45,7 +45,7 @@ fieldset {
     background-color: white;
     padding: 20px;
     border: 2px solid #ddd;
-    border-radius: 8px;
+    border-radius: 15px;
 }
 
 .login-header {
@@ -84,7 +84,7 @@ input[type="password"]::placeholder {
 }
 
 input[type="submit"] {
-    width: 100%;
+    width: 40%;
     padding: 10px;
     background-color: #151750;
     color: white;
@@ -93,10 +93,9 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s, transform 0.2s; /* Add transition for smooth effect */
-}
+  }
 
 input[type="submit"]:hover {
-    background-color: #111145; /* Change background color on hover */
-    transform: scale(1.05); /* Slightly increase size on hover */
+    background-color: #43439d; /* Change background color on hover */
 }
 
