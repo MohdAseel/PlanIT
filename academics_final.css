@@ -1,0 +1,143 @@
+/* General Styling */
+body {
+    font-family: 'Glacial Indifference';
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow-y: scroll; /* Enable vertical scrollbar */
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: auto; /* Allow both horizontal and vertical scrolling */
+}
+
+h1 {
+    font-family: 'Peace Sans';
+    font-size: 36px;
+    text-align: center;
+    color: #151750;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    background-color: #151750;
+    color: white;
+    width: 200px; /* Adjusted width */
+    padding: 10px;
+    flex-shrink: 0;
+    border-radius: 0px; /* Added border radius */
+}
+
+.sidebar h2 {
+    font-family: 'Peace Sans';
+    font-size: 24px;
+    color: #C2CBF8;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-family: 'Peace Sans';
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow: auto; /* Allow vertical scrolling */
+}
+
+.section {
+    margin-bottom: 20px;
+    height: calc(50% - 40px); /* Divides the sections evenly */
+    overflow: hidden;
+    margin-right: 0px;
+}
+
+.cards-container h3 {
+    font-family: 'Peace Sans';
+    font-size: 20px;
+    text-align: left;
+    color: #151750;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    margin-bottom: 10px;
+    padding:50px 10px 50px 10px
+}
+
+/* Card Container Styling */
+.cards-container {
+    display: flex;
+    overflow-x: auto;
+    background-color: #C2CBF8;
+    padding: 10px;
+    height: 100%;
+    border-radius: 8px; /* Added border radius */
+}
+
+
+.card {
+    background-color: white;
+    border: 2px solid #C2CBF8;
+    width: 351px;
+    height: 100%;
+    margin-right: 10px;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+    color: #151750; /* Change color for text */
+    border-radius: 8px; /* Added border radius */
+}
+
+.card:last-child {
+    margin-right: 0;
+}
+
+/* Scrollbar Styling for Horizontal Scroll */
+.cards-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+    background-color: #151750;
+    border-radius: 4px;
+}
+
+.cards-container::-webkit-scrollbar-track {
+    background-color: #C2CBF8;
+}
+
+/* Avoid Page Overflow */
+html, body {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+/* General Scrollbar for the Whole Page */
+body::-webkit-scrollbar {
+    width: 8px; /* Vertical scrollbar width */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #151750;
+    border-radius: 4px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #C2CBF8;
+}
+.navigationbar{
+    background-color: white;
+    color: white;
+    width: 70px; /* Adjusted width */
+    padding: 2px;
+    flex-shrink: 0;
+    border-radius: 8px; /* Added border radius */
+}
+.img_navig{
+    margin:2px 1px 2px 1px;
+}
