@@ -1,0 +1,112 @@
+/* Reset styles for consistent rendering */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Main container holding all sections: sidebar, schedule, and icons bar */
+.container {
+    display: flex;
+    min-height: 100vh; /* Full height of the viewport */
+}
+
+/* Left sidebar (Events Bar) */
+.sidebar {
+    width: 20%; /* Fixed width */
+    background-color: #1a237e; /* Blue background */
+    color: white;
+    padding: 20px;
+    flex-shrink: 0; /* Prevent the sidebar from shrinking */
+}
+
+/* Sidebar section headings */
+.sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.sidebar h3 {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+/* List styling within the sidebar */
+.sidebar ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.sidebar li {
+    margin: 5px 0;
+}
+
+/* Central schedule section */
+.schedule {
+    width: 60%; /* Takes up the central space */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Scroll if content exceeds height */
+}
+
+/* Header row containing the day labels */
+.header-row {
+    display: flex;
+    background-color: white;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.header-cell {
+    width: calc(100% / 6); /* Equal width for each day */
+    padding: 10px;
+    border-right: 1px solid #ccc;
+}
+
+/* Time-table containing all the time slots */
+.time-table {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Each row in the time-table */
+.time-row {
+    display: flex;
+}
+
+/* Time column with consistent width */
+.time-cell {
+    width: 15%; /* Fixed width for time column */
+    background-color: #f5f5f5; /* Light background */
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Event cells for each day */
+.event-cell {
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+/* Right-side icons bar */
+.icons-bar {
+    width: 20%; /* Same width as the sidebar */
+    background-color: #1a237e; /* Blue background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Individual icon styling */
+.icon {
+    color: white;
+    font-size: 24px;
+    margin: 10px 0;
+}
+

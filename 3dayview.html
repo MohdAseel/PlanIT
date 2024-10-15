@@ -1,213 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset = "utf-8" />
-        <meta name="viewport" content+"width=device-width", initial-scale="1.0" />
-        <meta name ="theme-color" content="#000000" />
-        <link rel="stylesheet" type="text/css" href="./css/index.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/font.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/styles.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/components.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/3dayview.css"/>
-    </head>
-    <body>
-        <div class="class-3-day-view">
-            <div class="column">
-                <div class="eventsbar">
-                    <div class="columnevents">
-                        <p class="events_bar ui text size-texts">EVENTS BAR</p>
-                        <div class="columnacads">
-                            <div class="columnwhatsnew">
-                                <p class="whatsnew ui text size-texts">Whats New?</p>
-                                <div class="recentevents">
-                                    <p class="recenteventone ui text size-textxs">Recent Event 1</p>
-                                    <p class="recenteventone ui text size-textxs">Recent Event 2</p>
-                                    <p class="recenteventone ui text size-textxs">Recent Event 3</p>
-                                </div>
-                            </div>
-                            <div class="columnwhatsnew">
-                                <p class="whatsnew ui text size-textxs">Starred</p>
-                                <div class="columnstarredcl">
-                                    <p class="recenteventone ui text size-texts">Starred Club 1</p>
-                                    <p class="recenteventone ui text size-texts">Starred Club 2</p>
-                                    <p class="recenteventone ui text size-texts">Starred Club 3</p>
-                                </div>
-                            </div>    
-                            <a href="google.com" target="_blank">
-                                <p class="whatsnew ui text size-textxs">Acads</p>
-                            </a>
-                            <a href="google.com" target="_blank">
-                                <p class="whatsnew ui text size-textxs">Technical Events</p>
-                            </a>
-                            <a href="google.com" target="_blank">
-                                <p class="whatsnew ui text size-textxs">Cultural Events</p>
-                            </a>
-                            <a href="google.com" target="_blank">
-                                <p class="whatsnew ui text size-textxs">Sports</p>
-                            </a>
-                        </div>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Bar and Weekly Schedule</title>
+    <link rel="stylesheet" href="3dayview.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>EVENTS BAR</h2>
+            <h3>Whats New?</h3>
+            <ul>
+                <li>Recent Event 1</li>
+                <li>Recent Event 2</li>
+                <li>Recent Event 3</li>
+            </ul>
+            <h3>Starred</h3>
+            <ul>
+                <li>Starred Club 1</li>
+                <li>Starred Club 2</li>
+                <li>Starred Club 3</li>
+            </ul>
+            <h3>Acads</h3>
+            <h3>Technical Events</h3>
+            <h3>Cultural Events</h3>
+            <h3>Sports</h3>
+        </div>
+
+        <div class="schedule">
+            <div class="header-row">
+                <div class="header-cell"></div>
+                <div class="header-cell">MON<br>1st Oct</div>
+                <div class="header-cell">TUE<br>2nd Oct</div>
+                <div class="header-cell">WED<br>3rd Oct</div>
+                <div class="header-cell">THU<br>4th Oct</div>
+                <div class="header-cell">FRI<br>5th Oct</div>
+            </div>
+
+            <div class="time-table">
+                <!-- Time rows -->
+                <div class="time-row">
+                    <div class="time-cell">00:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+
+                <!-- Repeat the above row structure for each time slot -->
+                <div class="time-row">
+                    <div class="time-cell">01:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                
+                <div class="time-row">
+                    <div class="time-cell">02:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">03:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">04:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">05:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">06:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">07:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">08:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">09:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">10:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">11:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">12:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">13:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">14:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">15:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">16:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">17:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">18:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">19:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">20:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">21:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">22:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">23:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                </div>
+                <div class="time-row">
+                    <div class="time-cell">24:00</div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
+                    <div class="event-cell"></div>
                 </div>
             </div>
-            <div class="row_twentythree">
-                <div class="row_twentytwo">
-                    <div class="columntime">
-                        <p class="time ui text size-textxs">00:00</p>
-                        <p class="time-1 ui text size-textxs">01:00</p>
-                        <div class="rowtime">
-                            <p class="time-2 ui text size-textxs">02:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">03:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">04:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">05:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">06:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">07:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">08:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">09:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">10:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">11:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">12:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">13:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">14:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">15:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">16:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">17:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">18:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">19:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">20:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">21:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">22:00</p>
-                        </div>
-                        <div class="row">
-                            <p class="time-2 ui text size-textxs">23:00</p>
-                        </div>
-                    </div>
-                    <div class="rowview">
-                        <div class="columnview">
-                            <header class="headerview">
-                                <div class="listview">
-                                    <div class="columnview-1">
-                                        <div class="view"></div>
-                                        <div class="row1stoct">
-                                            <p class="time-2 ui text size-textxs">1st Oct</p>
-                                        </div>
-                                    </div>
-                                    <div class="columnview-1">
-                                        <div class="view"></div>
-                                        <div class="row2ndoct">
-                                            <p class="time-2 ui text size-textxs">2nd Oct</p>
-                                        </div>
-                                    </div>
-                                    <div class="columnview-1">
-                                        <div class="view"></div>
-                                        <div class="row2ndoct">
-                                            <p class="time-2 ui text size-textxs">3rd Oct</p>
-                                        </div>
-                                    </div> 
-                                    <div class="columnview-1">
-                                        <div class="view"></div>
-                                        <div class="row2ndoct">
-                                            <p class="time-2 ui text size-textxs">4th Oct</p>
-                                        </div>
-                                    </div>
-                                    <div class="columnview-1">
-                                        <div class="view"></div>
-                                        <div class="row2ndoct">
-                                            <p class="time-2 ui text size-textxs">5th Oct</p>
-                                        </div>
-                                    </div>                    
-                                </div>
-                                <div class="columnsat">
-                                    <p class="sat ui text size-textxs">SAT</p>
-                                    <p class="time-2 ui text size-textxs">6th Oct</p>
-                                </div>
-                                <div class="columnsat">
-                                    <p class="sat ui text size-textxs">SUN</p>
-                                    <p class="time-2 ui text size-textxs">7th Oct</p>
-                                </div>
-                                <div class="columnsat">
-                                    <p class="sat ui text size-textxs">MON</p>
-                                    <p class="time-2 ui text size-textxs">8th Oct</p>
-                                </div>
-                                <div class="columnsat">
-                                    <p class="sat ui text size-textxs">TUE</p>
-                                    <p class="time-2 ui text size-textxs">9th Oct</p>
-                                </div>
-                                <div class="columnsat">
-                                    <p class="sat ui text size-textxs">WED</p>
-                                    <p class="time-2 ui text size-textxs">10th Oct</p>
-                                </div>
-                            </header>
-                            <div class="linenine_one"></div>
-                        </div>
-                        <div class="linenine_three"></div>
-                        <div class="linenine_five"></div>
-                        <div class="linenine_five"></div>
-                        <div class="rowlinenine">
-                            <div class="stacklinenine"></div>
-                                <div class="linenine_nine"></div>
-                                <div class="navigbar">
-                                    <div class="columncontrast">
-                                        <img src="public/images/img_contrast.svg" alt="Contrast" class="contrast_one" />
-                                        <img src="public/images/img_filter.svg" alt="Filter" class="filter_one" />
-                                        <img src="public/images/img_television.svg" alt="Television" class="television_one" />
-                                        <img src="public/images/img_share.svg" alt="Share" class="share_one" />
-                                        <img src="public/images/img_material_symbol.svg" alt="Materialsymbol" class="materialsymbol" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="linenine_eleven"></div>
-                        </div>
-                        <div class="linenine"></div>
-                        <div class="linenine_five"></div>
-                        <div class="linenine_five"></div>
-                        <div class="linenine_five"></div>
-                        <div class="linenine_five"></div>
-                        <div class="linenine_five"></div>
-                        <div class="linenine_five"></div>
-                        <div class="linenine_five"></div>
-                    </div>
-                </div>
-            </div>
-        </div>     
-    </body>
+        </div>
+
+        <div class="icons-bar">
+            <div class="icon">👤</div>
+            <div class="icon">🗂️</div>
+            <div class="icon">🔍</div>
+            <div class="icon">✅</div>
+            <div class="icon">🔲</div>
+        </div>
+    </div>
+</body>
 </html>
