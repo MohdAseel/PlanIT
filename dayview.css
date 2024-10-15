@@ -60,7 +60,7 @@
 }
 
 .header-cell {
-    width: calc(100% / 6); /* Equal width for each day */
+    width: calc(100% / 2); /* Equal width for DAY and DATE */
     padding: 10px;
     border-right: 1px solid #ccc;
 }
