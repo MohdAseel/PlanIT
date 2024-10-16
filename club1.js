@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Load 3 events initially
+    // Load 9 events initially
     loadEvents(9);
 
     // Load more events on scroll
