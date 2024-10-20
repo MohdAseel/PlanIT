@@ -1,53 +1,51 @@
-/* Reset styles for consistent rendering */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Glacial Interference';
-}
-
 /* Main container holding all sections: sidebar, schedule, and icons bar */
 .container {
     display: flex;
-    min-height: 100vh; /* Full height of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    overflow: hidden; /* Hide overflowing elements */
 }
-
-/* Left sidebar (Events Bar) */
+h1 {
+    font-family: 'Peace Sans';
+    font-size: 36px;
+    text-align: center;
+    color: #151750;
+}
 .sidebar {
-    width: 20%; /* Fixed width */
-    background-color: #1a237e; /* Blue background */
+    background-color: #151750;
     color: white;
-    padding: 20px;
-    flex-shrink: 0; /* Prevent the sidebar from shrinking */
+    padding: 10px;
+    flex-shrink: 0;
 }
-
-/* Sidebar section headings */
 .sidebar h2 {
+    font-family: 'Peace Sans';
     font-size: 24px;
-    margin-bottom: 10px;
+    color: #C2CBF8;
+    margin-bottom: 20px;
 }
-
-.sidebar h3 {
+.section-title {
+    font-family: 'Peace Sans';
+    font-size: 20px;
+    font-weight: bold;
     margin-top: 20px;
-    font-size: 18px;
 }
-
-/* List styling within the sidebar */
-.sidebar ul {
-    list-style: none;
-    margin-top: 10px;
+.navigationbar{
+    background-color: white;
+    color: white;
+    padding: 2px;
+    border-radius: 8px; /* Added border radius */
 }
-
-.sidebar li {
-    margin: 5px 0;
+.img_navig{
+    margin:2px 1px 2px 1px;
 }
-
 /* Central schedule section */
 .schedule {
-    width: 60%; /* Takes up the central space */
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* Scroll if content exceeds height */
+    flex-grow: 1; /* Takes up the remaining space between the two sidebars */
+    height: 100vh;
+    background-color: #f9f9f9;
+    padding: 20px; /* Adjust padding for centering */
+    margin-right: 20px; /* Space for the navigation bar */
 }
 
 /* Header row containing the day labels */
@@ -57,10 +55,12 @@
     font-weight: bold;
     text-align: center;
     border-bottom: 1px solid #ccc;
+    font-family: 'Peace Sans';
 }
 
+/* Adjust header-cell width */
 .header-cell {
-    width: calc(100% / 6); /* Equal width for each day */
+    flex: 1; /* All days get equal width */
     padding: 10px;
     border-right: 1px solid #ccc;
 }
@@ -69,16 +69,21 @@
 .time-table {
     display: flex;
     flex-direction: column;
+    height: calc(100vh - 80px); /* Dynamic height minus the header */
+    overflow-y: auto; /* Scroll the table if necessary */
+    background-color: white;
+    border-top: 1px solid #ccc;
 }
 
 /* Each row in the time-table */
 .time-row {
     display: flex;
+    height: 40px; /* Set row height */
 }
 
 /* Time column with consistent width */
 .time-cell {
-    width: 15%; /* Fixed width for time column */
+    width: 100px; /* Fixed width for time column */
     background-color: #f5f5f5; /* Light background */
     text-align: center;
     padding: 10px;
@@ -90,23 +95,5 @@
     flex: 1;
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;
-}
-
-/* Right-side icons bar */
-.icons-bar {
-    width: 20%; /* Same width as the sidebar */
-    background-color: #1a237e; /* Blue background */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    flex-shrink: 0; /* Prevent shrinking */
-}
-
-/* Individual icon styling */
-.icon {
-    color: white;
-    font-size: 2em;
-    margin: 10px 0;
 }
 
