@@ -1,74 +1,65 @@
-* {
+body {
+    font-family: 'Glacial Indifference';
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Glacial Interference';
-}
-
-body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #f4f4f4;
+    overflow-y: scroll; /* Enable vertical scrollbar */
 }
 
 .container {
     display: flex;
-    width: 100%;
-    height: 100vh; /* Make the container occupy the full height */
+    height: 100vh;
+    justify-content: space-between; /* Ensures proper spacing between elements */
 }
 
+h1 {
+    font-family: 'Peace Sans';
+    font-size: 36px;
+    text-align: center;
+    color: #151750;
+    margin: 20px 0; /* Add some margin at the top for spacing */
+}
+
+/* Sidebar Styling */
 .sidebar {
-    background-color: #1A1A53;
+    background-color: #151750;
     color: white;
-    width: 20%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    width: 200px; /* Adjusted width */
+    padding: 10px;
+    flex-shrink: 0;
 }
 
 .sidebar h2 {
-    font-size: 2em;
+    font-family: 'Peace Sans';
+    font-size: 24px;
+    color: #C2CBF8;
     margin-bottom: 20px;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.sidebar li {
-    margin: 10px 0;
-    font-size: 1.1em;
+.section-title {
+    font-family: 'Peace Sans';
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 .main-content {
-    flex-grow: 1; /* Make the main content expand to fill the space between the sidebars */
+    flex-grow: 1; /* Takes up remaining space between sidebar and navigation */
     display: flex;
     justify-content: center;
+    align-items: flex-start; /* Aligns content at the top */
+    padding-top: 20px; /* Adds some padding to separate the header from the top */
 }
 
-.centered-text {
-    font-size: 3em;
-    text-transform: uppercase;
-    text-align: center;
+/* Navigation bar styling */
+.navigationbar {
+    background-color: white;
+    width: 70px; /* Adjusted width */
+    padding: 2px;
+    flex-shrink: 0;
+    border-radius: 8px;
 }
 
-.right-sidebar {
-    background-color: #1A1A53;
-    color: white;
-    width: 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
-.icon {
-    font-size: 2em;
-    margin: 10px 0;
-    color: white;
+.img_navig {
+    margin: 2px 1px 2px 1px;
 }
