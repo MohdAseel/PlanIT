@@ -15,28 +15,51 @@ body {
     display: flex;
     width: 100%;
 }
+h1 {
+    font-family: 'Peace Sans';
+    font-size: 36px;
+    text-align: center;
+    color: #151750;
+}
 
+/* Sidebar Styling */
 .sidebar {
-    background-color: #1A1A53;
+    background-color: #151750;
     color: white;
-    width: 20%;
-    padding: 20px;
+    width: 200px; /* Adjusted width */
+    padding: 10px;
+    flex-shrink: 0;
+    border-radius: 0px; /* Added border radius */
 }
 
 .sidebar h2 {
-    font-size: 2em;
+    font-family: 'Peace Sans';
+    font-size: 24px;
+    color: #C2CBF8;
     margin-bottom: 20px;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding-left: 0;
+.section-title {
+    font-family: 'Peace Sans';
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
-.sidebar li {
-    margin: 10px 0;
-    font-size: 1.1em;
+/* Main Content Styling */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow: auto; /* Allow vertical scrolling */
 }
+
+.section {
+    margin-bottom: 20px;
+    height: calc(50% - 40px); /* Divides the sections evenly */
+    overflow: hidden;
+    margin-right: 0px;
+}
+
 
 .main-content {
     flex-grow: 1;
@@ -76,21 +99,17 @@ body {
     margin: 5px 0;
     font-size: 1.1em;
 }
-
-.right-sidebar {
-    width: 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: #1A1A53; /* Make the right sidebar blue as well */
+.navigationbar{
+    background-color: white;
+    color: white;
+    width: 70px; /* Adjusted width */
+    padding: 2px;
+    flex-shrink: 0;
+    border-radius: 8px; /* Added border radius */
+}
+.img_navig{
+    margin:2px 1px 2px 1px;
 }
 
-.icon {
-    font-size: 2em;
-    margin: 10px 0;
-    color: white; /* Make the icons white */
-}
 
 
