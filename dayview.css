@@ -1,112 +1,109 @@
-/* Reset styles for consistent rendering */
-* {
+body {
+    font-family: 'Glacial Indifference';
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Glacial Interference';
+    background-color: #f4f4f4;
+   
 }
 
-/* Main container holding all sections: sidebar, schedule, and icons bar */
 .container {
     display: flex;
-    min-height: 100vh; /* Full height of the viewport */
+    height: 100vh;
+    overflow: hidden; /* Keep container height and ensure content fits */
 }
 
-/* Left sidebar (Events Bar) */
+h1 {
+    font-family: 'Peace Sans';
+    font-size: 36px;
+    text-align: center;
+    color: #151750;
+}
+
+/* Sidebar Styling */
 .sidebar {
-    width: 20%; /* Fixed width */
-    background-color: #1a237e; /* Blue background */
+    background-color: #151750;
     color: white;
-    padding: 20px;
-    flex-shrink: 0; /* Prevent the sidebar from shrinking */
+    width: 200px; /* Adjusted width */
+    padding: 10px;
+    flex-shrink: 0;
 }
 
-/* Sidebar section headings */
 .sidebar h2 {
+    font-family: 'Peace Sans';
     font-size: 24px;
-    margin-bottom: 10px;
+    color: #C2CBF8;
+    margin-bottom: 20px;
 }
 
-.sidebar h3 {
-    margin-top: 20px;
-    font-size: 18px;
-}
-
-/* List styling within the sidebar */
-.sidebar ul {
-    list-style: none;
-    margin-top: 10px;
-}
-
-.sidebar li {
-    margin: 5px 0;
-}
-
-/* Central schedule section */
-.schedule {
-    width: 60%; /* Takes up the central space */
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto; /* Scroll if content exceeds height */
-}
-
-/* Header row containing the day labels */
-.header-row {
-    display: flex;
-    background-color: white;
+.section-title {
+    font-family: 'Peace Sans';
+    font-size: 20px;
     font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid #ccc;
+    margin-top: 20px;
 }
 
-.header-cell {
-    width: calc(100% / 2); /* Equal width for DAY and DATE */
-    padding: 10px;
-    border-right: 1px solid #ccc;
+/* Right Navigation Bar */
+.navigationbar {
+    background-color: white;
+    width: 70px; /* Adjusted width */
+    padding: 2px;
+    flex-shrink: 0;
+    border-radius: 8px; /* Added border radius */
 }
 
-/* Time-table containing all the time slots */
-.time-table {
+.img_navig {
+    margin: 2px 1px 2px 1px;
+}
+
+/* Planner Container Styling */
+.planner-container {
+    display: flex;
+    flex-grow: 1; /* Takes up the remaining space between the two sidebars */
+    height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.time-slots {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    border-right: 1px solid #ccc;
+    padding-left: 10px;
+    background-color: white;
 }
 
-/* Each row in the time-table */
-.time-row {
-    display: flex;
-}
-
-/* Time column with consistent width */
-.time-cell {
-    width: 15%; /* Fixed width for time column */
-    background-color: #f5f5f5; /* Light background */
-    text-align: center;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-/* Event cells for each day */
-.event-cell {
+.time-slot {
     flex: 1;
     border-bottom: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+    padding: 5px 0;
+    font-size: 14px;
+    color: #000;
 }
 
-/* Right-side icons bar */
-.icons-bar {
-    width: 20%; /* Same width as the sidebar */
-    background-color: #1a237e; /* Blue background */
+.day-label {
+    width: 60px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-around;
-    flex-shrink: 0; /* Prevent shrinking */
+    padding: 10px;
 }
 
-/* Individual icon styling */
-.icon {
-    color: white;
-    font-size: 2em;
-    margin: 10px 0;
+.day {
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 5px;
+    text-align: center;
+    font-family:'Peace Sans';
+    color: #151750;
+    margin-top: 300px;
 }
 
+.date {
+    font-size: 20px;
+    text-align: center;
+    margin-top: auto;
+    font-family:'Glacial Indifference';
+    color: #151750;
+    margin-bottom: 250px;
+}
