@@ -1,0 +1,38 @@
+body {
+  font-family: 'Glacial Indifference';
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  overflow-y: scroll; /* Enable vertical scrollbar */
+}
+
+h1 {
+  font-family: 'Peace Sans';
+  font-size: 36px;
+  text-align: center;
+  color: #151750;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  background-color: #151750;
+  color: white;
+  width: 200px; /* Adjusted width */
+  padding: 10px;
+  flex-shrink: 0;
+  border-radius: 2px; /* Added border radius */
+}
+
+.sidebar h2 {
+  font-family: 'Peace Sans';
+  font-size: 24px;
+  color: #C2CBF8;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: 'Peace Sans';
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
