@@ -35,7 +35,25 @@ h1 {
     color: #C2CBF8;
     margin-bottom: 20px;
 }
-
+.profile-icons {
+    width: 3%;
+    background-color: white;
+    display: flex;
+    flex-direction: column; /* Make icons vertical */
+    align-items: center;
+    padding: 20px;
+  }
+  
+.profile-icon {
+    width: 50px; /* Adjust size as needed */
+    height: 50px;
+    margin-bottom: 20px; /* Space between icons */
+    cursor: pointer;
+}
+  
+.profile-icon:hover {
+    opacity: 0.8;
+}
 .section-title {
     font-family: 'Peace Sans';
     font-size: 20px;
@@ -63,3 +81,6 @@ h1 {
 .img_navig {
     margin: 2px 1px 2px 1px;
 }
+
+
+
