@@ -1,28 +1,28 @@
-import react from "react";
-import SideBar from "./assets/SideBar";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Sports from "./Pages/Sports";
 import Technical from "./Pages/Technical";
 import Cultural from "./Pages/Cultural";
 import Acads from "./Pages/Acads";
-import Home3DayView from "./Pages/home-3-dayview";
-
-function App() {
+import WeekView from "./Pages/weekview.jsx";
+import Loginpagin from "./Pages/loginpagin.jsx";
+import Sidebar from "./Components/SideBar.jsx";
+export default function App() {
   return (
-    <Router>
-      <div>
-        <SideBar />
-      </div>
-      <Routes>
-        <Route path="/sports" element={<Sports />} />
-        <Route path="/technical" element={<Technical />} />
-        <Route path="/cultural" element={<Cultural />} />
-        <Route path="/acads" element={<Acads />} />
-        <Route path="/" element={<Home3DayView />} />
-      </Routes>
-    </Router>
+    <div className="App">
+      <Router>
+        <Sidebar />
+
+        <Routes>
+          <Route path="/" element={<Loginpagin />} />
+          <Route path="/weekview" element={<WeekView />} />
+          <Route path="/sports" element={<Sports />} />
+          <Route path="/technical" element={<Technical />} />
+          <Route path="/acads" element={<Acads />} />
+          <Route path="/cultural" element={<Cultural />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
-
-export default App;
