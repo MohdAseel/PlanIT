@@ -9,7 +9,9 @@ body {
     bottom: 0;
     position: fixed;
     overflow: hidden;
-    width: 250px;
+    max-width: 250px;
+    width: 20%;
+    min-width: 155px;
     background-color: #151750;
     padding: 10px;
     border-radius: 0px 16px 16px 0px;
