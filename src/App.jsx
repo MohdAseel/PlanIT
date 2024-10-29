@@ -15,7 +15,6 @@ export default function App() {
     <div className="App">
       <Router>
         <Sidebar />
-
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/weekview" element={<WeekView />} />
