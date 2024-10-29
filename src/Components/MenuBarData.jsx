@@ -4,22 +4,32 @@ const MenuBarData = [
   {
     title: "profile",
     path: "../../photos/icons_menu_bar/ic--round-account-box.svg",
+    link: "/profile",
   },
   {
     title: "weekview",
     path: "../../photos/icons_menu_bar/material-symbols--view-week.svg",
+    link: "/weekview",
   },
   {
     title: "dayview",
     path: "../../photos/icons_menu_bar/material-symbols--view-day.svg",
+    link: "/dayview",
   },
   {
     title: "filter",
     path: "../../photos/icons_menu_bar/iconoir--filter-solid.svg",
+    link: "/filter",
   },
   {
     title: "monthview",
     path: "../../photos/icons_menu_bar/material-symbols-light--calendar-view-month.svg",
+    link: "/monthview",
+  },
+  {
+    title: "addevent",
+    path: "../../photos/icons_menu_bar/basil--add-solid.svg",
+    link: "/addevent",
   },
 ];
 

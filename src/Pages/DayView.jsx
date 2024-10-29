@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideBar from "../Components/SideBar";
 import MenuBar from "../Components/MenuBar";
 import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
-import { createViewWeek } from "@schedule-x/calendar";
-import "@schedule-x/theme-default/dist/calendar.css";
-import { createEventModalPlugin } from "@schedule-x/event-modal";
+import { createViewDay } from "@schedule-x/calendar";
+import { createEventsServicePlugin } from "@schedule-x/events-service";
 
+import "@schedule-x/theme-default/dist/index.css";
 import "./pagestyle.css";
-function WeekView() {
+function DayView() {
   const calendar = useCalendarApp({
-    views: [createViewWeek()],
+    views: [createViewDay()],
     events: [
       {
-        id: "1",
+        id: 131,
         title: "Event 1",
-        start: "2024-10-27 00:00",
-        end: "2024-10-27 00:30",
+        start: "2024-10-30 00:00",
+        end: "2024-10-30 23:59",
+      },
+      {
+        id: 221,
+        title: "Event 2",
+        start: "2024-10-30 00:00",
+        end: "2024-10-30 02:59",
       },
     ],
   });
@@ -29,10 +35,10 @@ function WeekView() {
         <ScheduleXCalendar calendarApp={calendar} />
       </div>
       <div className="menubar-container">
-        <MenuBar props="weekview" />
+        <MenuBar props="dayview" />
       </div>
     </div>
   );
 }
 
-export default WeekView;
+export default DayView;

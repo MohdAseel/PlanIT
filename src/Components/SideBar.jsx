@@ -10,8 +10,8 @@ export default function Sidebar() {
       <div className="SidebarList">
         {SideBarData.map((val, key) => {
           return (
-            <li>
-              <NavLink to={val.link} key={key} className="title-nav">
+            <li key={key}>
+              <NavLink to={val.link} className="title-nav">
                 {val.title}
               </NavLink>
               {val.sublink ? (

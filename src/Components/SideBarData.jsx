@@ -3,37 +3,37 @@ import React from "react";
 export const SideBarData = [
   {
     title: "Whats New",
-    link: "/weekview",
+    link: "/whatsnew",
     sublink: [
       {
         title: "recent event 1",
-        link: "/weekview",
+        link: "/whatsnew",
       },
       {
         title: "recent event 2",
-        link: "/weekview",
+        link: "/whatsnew",
       },
       {
         title: "recent event 3",
-        link: "/weekview",
+        link: "/whatsnew",
       },
     ],
   },
   {
     title: "Starred",
-    link: "/weekview",
+    link: "/satarred",
     sublink: [
       {
         title: "starred Club 1",
-        link: "/weekview",
+        link: "/satarred",
       },
       {
         title: "starred Club 2",
-        link: "/weekview",
+        link: "/satarred",
       },
       {
         title: "starred Club 3",
-        link: "/weekview",
+        link: "/satarred",
       },
     ],
   },
