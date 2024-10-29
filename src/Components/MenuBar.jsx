@@ -1,11 +1,17 @@
 import React from "react";
+import MenuBarData from "./MenuBarData";
 import "./components.css";
 
 const MenuBar = () => {
   return (
-    <div>
-      <h1>Menu Bar</h1>
-      <p>Menu Bar</p>
+    <div className="MenuBar">
+      <ul>
+        {MenuBarData.map((item, index) => (
+          <li key={index}>
+            <img src={item.path} alt={item.title} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
