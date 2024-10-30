@@ -6,7 +6,7 @@ import { createViewDay } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 
 import "@schedule-x/theme-default/dist/index.css";
-import "./pagestyle.css";
+import "./pagestyle/calendarpagestyle.css";
 function DayView() {
   const calendar = useCalendarApp({
     views: [createViewDay()],

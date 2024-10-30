@@ -54,7 +54,7 @@ h1 {
 .section {
     margin-bottom: 20px;
     height: calc(50% - 40px); /* Divides the sections evenly */
-    overflow: hidden;
+    
     margin-right: 0px;
 }
 
@@ -76,6 +76,7 @@ h1 {
     background-color: #C2CBF8;
     padding: 10px;
     height: 100%;
+    
     border-radius: 8px; /* Added border radius */
 }
 

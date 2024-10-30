@@ -4,9 +4,9 @@ import MenuBar from "../Components/MenuBar";
 import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
 import { createViewMonthGrid } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
-
 import "@schedule-x/theme-default/dist/index.css";
-import "./pagestyle.css";
+import "./pagestyle/calendarpagestyle.css";
+
 function MonthView() {
   const calendar = useCalendarApp({
     views: [createViewMonthGrid()],

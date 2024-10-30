@@ -5,8 +5,8 @@ import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
 import { createViewWeek } from "@schedule-x/calendar";
 import "@schedule-x/theme-default/dist/calendar.css";
 import { createEventModalPlugin } from "@schedule-x/event-modal";
+import "./pagestyle/calendarpagestyle.css";
 
-import "./pagestyle.css";
 function WeekView() {
   const calendar = useCalendarApp({
     views: [createViewWeek()],
