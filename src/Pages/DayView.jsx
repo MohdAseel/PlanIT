@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import SideBar from "../Components/SideBar";
+import SideBar from "../Components/Sidebar.jsx";
 import MenuBar from "../Components/MenuBar";
 import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
 import { createViewDay } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
-
 import "@schedule-x/theme-default/dist/index.css";
 import "./pagestyle/calendarpagestyle.css";
+import "./pagestyle/pagestyle.css";
+
 function DayView() {
   const calendar = useCalendarApp({
     views: [createViewDay()],
@@ -27,11 +28,11 @@ function DayView() {
   });
 
   return (
-    <div className="view-container">
+    <div className="page-container">
       <div className="sidebar-container">
         <SideBar />
       </div>
-      <div className="calendar-container">
+      <div className="main-content">
         <ScheduleXCalendar calendarApp={calendar} />
       </div>
       <div className="menubar-container">

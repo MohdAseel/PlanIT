@@ -16,17 +16,15 @@ export default function Sidebar() {
               </NavLink>
               {val.sublink ? (
                 <div className="subtitle-li">
-                  {val.sublink.map((subval, subkey) => (
-                    <li>
-                      <NavLink
-                        to={subval.link}
-                        key={subkey}
-                        className="subtitle-nav"
-                      >
-                        {subval.title}
-                      </NavLink>
-                    </li>
-                  ))}
+                  <ul>
+                    {val.sublink.map((subval, subkey) => (
+                      <li key={subkey}>
+                        <NavLink to={subval.link} className="subtitle-nav">
+                          {subval.title}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ) : null}
             </li>

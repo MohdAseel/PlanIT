@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebar from "../Components/SideBar";
+import Sidebar from "../Components/Sidebar";
 import MenuBar from "../Components/MenuBar";
 import "./pagestyle/acadstyle.css";
-
+import "./pagestyle/pagestyle.css";
 function CardAcads(props) {
   return (
     <div className="card-acads">
@@ -20,7 +20,7 @@ function CardAcads(props) {
 
 export default function Acads() {
   return (
-    <div className="acadpage-container">
+    <div className="page-container">
       <div className="sidebar-container">
         <Sidebar />
       </div>

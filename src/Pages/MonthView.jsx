@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import SideBar from "../Components/SideBar";
+import SideBar from "../Components/Sidebar";
 import MenuBar from "../Components/MenuBar";
 import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
 import { createViewMonthGrid } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import "@schedule-x/theme-default/dist/index.css";
 import "./pagestyle/calendarpagestyle.css";
+import "./pagestyle/pagestyle.css";
 
 function MonthView() {
   const calendar = useCalendarApp({
@@ -27,11 +28,11 @@ function MonthView() {
   });
 
   return (
-    <div className="view-container">
+    <div className="page-container">
       <div className="sidebar-container">
         <SideBar />
       </div>
-      <div className="calendar-container">
+      <div className="main-content">
         <ScheduleXCalendar calendarApp={calendar} />
       </div>
       <div className="menubar-container">

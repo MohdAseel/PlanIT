@@ -6,13 +6,11 @@ import "./components.css";
 const MenuBar = (props) => {
   const currentPage = props.props;
 
-  console.log(typeof currentPage);
   return (
     <div className="MenuBar">
       <ul>
-        {MenuBarData.map((item, index) => (
-          <div key={index}>
-            {console.log(typeof item.title)}
+        {MenuBarData.map((item, key) => (
+          <div key={key}>
             {currentPage === item.title ? null : (
               <li>
                 <Link to={item.link}>
