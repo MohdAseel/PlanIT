@@ -11,8 +11,8 @@ const Pagedata = [
         title: "CFI Clubs",
         data: [
           {
-            title: "club 1",
-            link: "/club-1",
+            title: "AI Club",
+            link: "/TAIC",
           },
           {
             title: "club 2",
@@ -124,8 +124,8 @@ const Pagedata = [
         title: "Sports Clubs",
         data: [
           {
-            title: "club 1",
-            link: "/club-1",
+            title: "football",
+            link: "/football",
           },
           {
             title: "club 2",

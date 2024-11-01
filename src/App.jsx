@@ -10,8 +10,13 @@ import LoginPage from "./Pages/LoginPage.jsx";
 import DayView from "./Pages/DayView.jsx";
 import ERROR404 from "./Pages/ERROR404.jsx";
 import MonthView from "./Pages/MonthView.jsx";
+import ClubPage from "./Components/clubpage.jsx";
+import Pagedata from "./Pages/pagedata/PageData.jsx";
 
 export default function App() {
+  const all_event_pages = [];
+  const Ai_club = <ClubPage id="TAIC" />;
+
   return (
     <div className="App">
       <Router>
@@ -24,6 +29,8 @@ export default function App() {
           <Route path="/acads" element={<Acads />} />
           <Route path="/cultural" element={<Cultural />} />
           <Route path="/monthview" element={<MonthView />} />
+
+          <Route path="/TAIC" element={Ai_club}></Route>
           <Route path="*" element={<ERROR404 />} />
         </Routes>
       </Router>
