@@ -30,7 +30,7 @@ export default function App() {
           <Route path="/cultural" element={<Cultural />} />
           <Route path="/monthview" element={<MonthView />} />
 
-          <Route path="/TAIC" element={Ai_club}></Route>
+          <Route path="/:clubId" element={<ClubPage />} />
           <Route path="*" element={<ERROR404 />} />
         </Routes>
       </Router>

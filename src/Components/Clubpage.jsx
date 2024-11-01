@@ -1,25 +1,48 @@
 import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import ClubData from "./ClubData";
-import { NavLink } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import MenuBar from "./MenuBar";
 import "../Pages/pagestyle/pagestyle.css";
-
+import EventCard from "./EventCard";
+import "./EventCard.css";
+import EventData from "./EventData";
 const ClubPage = () => {
-  //this is dynamic render for each clubs on page with a click
-  //the link bar will contain a unique club id which will be used to fech data from the backend
-  //fetch data from backend using the club id
-  // as there is no backend we fecth it from a data file
+  // Extract the club id from the URL parameters
+  const { clubId } = useParams();
+  const navigate = useNavigate();
 
-  const clubid = props.clubid;
-  console.log(clubid);
+  // Fetch club data based on the club id
+  const data = ClubData.find((data_club) => data_club.id === clubId);
+
+  if (!data) {
+    return (
+      <>
+        <h1>Data not found</h1>
+        <button onClick={() => navigate(-1)}>Back</button>
+      </>
+    );
+  }
+
+  const eData = EventData.find((data) => data.clubid === clubId);
+  const eventData = eData ? eData.data : [];
+  console.log(eventData);
+  //eventData is an array of objects with eventid ,title, date, time, description, imagelink
   return (
     <div className="page-container">
       <div className="sidebar-container">
         <Sidebar />
       </div>
       <div className="main-content">
-        <h1>{clubid}</h1>
+        <h1>{data.name}</h1>
+        <p>{data.description}</p>
+        <div className="event-card-container">
+          {eventData
+            ? eventData.map((event) => (
+                <EventCard key={event.id} data={event} />
+              ))
+            : null}
+        </div>
       </div>
       <div className="menubar-container">
         <MenuBar props="dayview" />

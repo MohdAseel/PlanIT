@@ -174,7 +174,6 @@ const Pagedata = [
 function PagedataFetcher(props) {
   const sphere = props.sphere;
   const sphereData = Pagedata.find((data) => data.title === sphere);
-
   if (!sphereData) {
     console.error(`Sphere "${sphere}" not found in Pagedata.`);
     return [];
