@@ -11,12 +11,8 @@ import DayView from "./Pages/DayView.jsx";
 import ERROR404 from "./Pages/ERROR404.jsx";
 import MonthView from "./Pages/MonthView.jsx";
 import ClubPage from "./Components/clubpage.jsx";
-import Pagedata from "./Pages/pagedata/PageData.jsx";
 
 export default function App() {
-  const all_event_pages = [];
-  const Ai_club = <ClubPage id="TAIC" />;
-
   return (
     <div className="App">
       <Router>
