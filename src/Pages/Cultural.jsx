@@ -15,7 +15,7 @@ export default function Cultural() {
       </div>
       <div className="main-content">
         <h1>Cultural</h1>
-        <p style={{ textAlign: "center" }}>All the insti Cultural stuff</p>
+        <p>All the insti Cultural stuff</p>
         <Clubcards data={culturalData} />
       </div>
       <div className="menubar-container">

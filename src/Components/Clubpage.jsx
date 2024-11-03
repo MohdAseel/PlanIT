@@ -5,9 +5,10 @@ import Sidebar from "./Sidebar";
 import MenuBar from "./MenuBar";
 import "../Pages/pagestyle/pagestyle.css";
 import EventCard from "./EventCard";
-import "./EventCard.css";
+
 import EventData from "./EventData";
-const ClubPage = () => {
+
+function ClubPage() {
   // Extract the club id from the URL parameters
   const { clubId } = useParams();
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const ClubPage = () => {
 
   const eData = EventData.find((data) => data.clubid === clubId);
   const eventData = eData ? eData.data : [];
-  console.log(eventData);
+
   //eventData is an array of objects with eventid ,title, date, time, description, imagelink
   return (
     <div className="page-container">
@@ -49,6 +50,6 @@ const ClubPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ClubPage;

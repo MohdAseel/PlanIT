@@ -15,7 +15,7 @@ export default function Sports() {
       </div>
       <div className="main-content">
         <h1>Sports</h1>
-        <p style={{ textAlign: "center" }}>All the insti sports stuff</p>
+        <p>All the insti sports stuff</p>
         <Clubcards data={sportsData} />
       </div>
       <div className="menubar-container">

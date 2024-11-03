@@ -17,7 +17,12 @@ body {
 .main-content {
     flex-grow: 1;
     padding: 20px;
-    
+    overflow: auto; /* Allow vertical scrolling */
+    margin: 20px;
+}
+
+.main-content p {
+    text-align: center;
 }
 
 .sidebar-container {
@@ -30,9 +35,8 @@ body {
 .menubar-container {
     height: 100vh;
     width: 60px;
-    z-index: 10;
+    
 }
-
 h1 {
     font-family: 'Peace Sans';
     font-weight: 100;

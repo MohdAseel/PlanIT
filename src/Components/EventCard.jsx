@@ -1,7 +1,6 @@
 import React from "react";
 import EventData from "./EventData";
-import "./eventcard.css";
-
+import "./components.css";
 const EventCard = (props) => {
   //props will have return an object with
   //event id is clubid +4numbers
