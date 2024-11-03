@@ -29,9 +29,9 @@ function EventCardExpanded(props) {
           </div>
         </div>
       </div>
-      <div className="buttons">
-        <button className="button add-event">Add Event</button>
-        <button className="button show-less" onClick={onClose}>
+      <div className="dual-botton-container">
+        <button className="btn-left">Add Event</button>
+        <button className="btn-right" onClick={onClose}>
           Show less
         </button>
       </div>

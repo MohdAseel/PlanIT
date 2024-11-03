@@ -8,13 +8,6 @@ export function Overlay({ isOpen, onClose, children }) {
         <div className="overlay">
           <div className="overlay-background" onClick={onClose} />
           <div className="overlay-container">
-            <div className="overlay-controls">
-              {/* <button
-                className="overlay-close"
-                type="button"
-                onClick={onClose}
-              /> */}
-            </div>
             {React.cloneElement(children, { onClose })}
           </div>
         </div>

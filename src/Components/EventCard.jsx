@@ -35,9 +35,9 @@ function EventCard(props) {
         </h2>
         <img className="event-image" src={data.image} alt="Event Image" />
         <p className="event-description">{data.description}</p>
-        <div className="buttons">
-          <button className="button add-event">Add Event</button>
-          <button className="button learn-more" onClick={toggleOverlay}>
+        <div className="dual-botton-container">
+          <button className="btn-left">Add Event</button>
+          <button className="btn-right" onClick={toggleOverlay}>
             Learn More
           </button>
           <Overlay isOpen={isOpen} onClose={toggleOverlay}>

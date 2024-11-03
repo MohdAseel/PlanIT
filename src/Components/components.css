@@ -206,7 +206,7 @@ body {
     color: #151750;
 }    
 
-.event-image{
+.event-image {
     width: 250px;
     height: 250px;
     align-self: center;
@@ -228,6 +228,7 @@ body {
 }
 .event-card-expanded-splitter-right{
     flex: 1;
+    
 }
 
 .event-card-expanded-splitter-left{
@@ -259,6 +260,7 @@ body {
     width: fit-content;
     height: fit-content;
     border-radius: 16px;
+    cursor: default;
   }
   
   .overlay-controls {
@@ -270,16 +272,48 @@ body {
   .overlay-close:after {
     display: inline-block;
   }
+
+
+/* dual button styling */
   
-  .overlay-close {
-    border: none;
-    background-color: transparent;
-    font-size: 36px;
+
+
+.dual-botton-container {
+    display: inline-flex;
+    
+    overflow: hidden; /* Ensures rounded corners on hover */
+    align-self: flex-end;
+    font-size: 20px;
+    margin: 10px;
     cursor: pointer;
+}
+  
+
+  
+  /* Left button styling */
+  .btn-left {
+      font-family: 'glacial indifference';
+      background-color: #C2CBF8 ;/* Light blue background */
+   color: #151750; /* Dark navy text color */
+   height: fit-content;
+   border-radius: 16px 0px 0px 16px;
+   padding: 8px 16px; /* Add padding to the text inside the button */
+   border: none;
+   cursor: pointer;
+
+
   }
   
 
-
   
-
-
+  /* Right button styling */
+  .btn-right {
+    background-color: #0a0a56; /* Dark navy background */
+    color: #fff; /* White text color */
+       font-family: 'glacial indifference';
+       height: fit-content;
+   border-radius: 0px 16px 16px 0px;
+   padding: 8px 16px; /* Add padding to the text inside the button */
+    border: none;
+    cursor: pointer;
+  }
