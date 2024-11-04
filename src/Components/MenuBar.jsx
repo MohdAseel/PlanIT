@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuBarData from "./MenuBarData";
 import { Link } from "react-router-dom";
 import "./components.css";
+import Overlay from "./Overlay";
+import CreateEvent from "./CreateEvent";
 
 const MenuBar = (props) => {
   const currentPage = props.props;
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
+  const toggleOverlay = () => {
+    setIsOverlayOpen(!isOverlayOpen);
+  };
 
   return (
     <div className="MenuBar">
@@ -20,6 +27,22 @@ const MenuBar = (props) => {
             )}
           </div>
         ))}
+        {/* {
+title: "addevent",
+path: "../../photos/icons_menu_bar/basil--add-solid.svg",
+link: "/addevent",
+}, */}
+        <li>
+          <img
+            src="../../photos/icons_menu_bar/basil--add-solid.svg"
+            alt="addevent"
+            onClick={toggleOverlay}
+            script="cursor:pointer"
+          />
+          <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
+            <CreateEvent />
+          </Overlay>
+        </li>
       </ul>
     </div>
   );

@@ -26,11 +26,6 @@ const MenuBarData = [
     path: "../../photos/icons_menu_bar/material-symbols-light--calendar-view-month.svg",
     link: "/monthview",
   },
-  {
-    title: "addevent",
-    path: "../../photos/icons_menu_bar/basil--add-solid.svg",
-    link: "/addevent",
-  },
 ];
 
 export default MenuBarData;

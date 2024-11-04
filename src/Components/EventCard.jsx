@@ -14,6 +14,7 @@ function EventCard(props) {
   //   title: "AI Club starter event",
   //   date: "2021-10-10",
   //   time: "10:00",
+  //   location: "CLT",
   //   description: "This is the first event of the AI Club of IIT Madras",
   //   image: "../../photos/images.png",
   const data = props.data;
@@ -34,6 +35,7 @@ function EventCard(props) {
           {data.date}
         </h2>
         <img className="event-image" src={data.image} alt="Event Image" />
+        <p className="event-location">location: {data.location}</p>
         <p className="event-description">{data.description}</p>
         <div className="dual-botton-container">
           <button className="btn-left">Add Event</button>
