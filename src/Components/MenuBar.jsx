@@ -40,7 +40,7 @@ link: "/addevent",
             script="cursor:pointer"
           />
           <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
-            <CreateEvent />
+            <CreateEvent isOpen={isOverlayOpen} onClose={toggleOverlay} />
           </Overlay>
         </li>
       </ul>

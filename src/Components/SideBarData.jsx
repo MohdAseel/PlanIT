@@ -43,12 +43,12 @@ export const SideBarData = [
     link: "/acads",
   },
   {
-    title: "Sports",
-    link: "/sports",
-  },
-  {
     title: "Technical",
     link: "/technical",
+  },
+  {
+    title: "Sports",
+    link: "/sports",
   },
   {
     title: "Cultural",

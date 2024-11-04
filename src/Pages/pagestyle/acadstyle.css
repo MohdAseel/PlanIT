@@ -3,11 +3,12 @@
 
 .section {
     margin-bottom: 20px;
-    height: calc(50% - 80px); /* Divides the sections evenly */
+    height: calc(50% - 80px); 
+    min-height: fit-content;/* Divides the sections evenly */
     overflow: hidden;
     margin-right: 10px;
     border-radius: 16px;
-
+overflow-y: hidden;
 }
 .section-container {
     display: flex;
@@ -27,7 +28,7 @@
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-weight: 100;
-    margin-bottom: 10px;
+    
     
 }
 .cards-container {    

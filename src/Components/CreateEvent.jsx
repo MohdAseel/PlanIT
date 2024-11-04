@@ -8,20 +8,23 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const today = dayjs();
 const format = "YYYY-MM-DD HH:mm";
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e?.fileList;
-};
 
-const onFinish = (e) => {
-  console.log(e);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-function CreateEvent() {
+function CreateEvent({ onClose }) {
+  const normFile = (e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
+  };
+
+  const onFinish = (e) => {
+    console.log(e);
+    window.alert("Event Created");
+    onClose();
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   return (
     <div className="create-event-container">
       <h2>Create Event</h2>
@@ -99,13 +102,11 @@ function CreateEvent() {
             },
           ]}
         >
-          <Input />
+          <TextArea required rows={4} />
         </Form.Item>
 
         <Form.Item>
-          <Button large htmlType="submit">
-            Create
-          </Button>
+          <Button htmlType="submit">Create</Button>
         </Form.Item>
       </Form>
     </div>
