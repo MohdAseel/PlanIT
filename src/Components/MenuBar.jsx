@@ -5,12 +5,21 @@ import "./components.css";
 import Overlay from "./Overlay";
 import CreateEvent from "./CreateEvent";
 
+import { Input } from "antd";
+
+import CheckboxMenu from "./CheckBoxMenu";
+
 const MenuBar = (props) => {
   const currentPage = props.props;
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   const toggleOverlay = () => {
     setIsOverlayOpen(!isOverlayOpen);
+  };
+
+  //<--for filter-->
+  const onCheckboxChange = (selection) => {
+    console.log(selection);
   };
 
   return (
@@ -42,6 +51,20 @@ link: "/addevent",
           <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
             <CreateEvent isOpen={isOverlayOpen} onClose={toggleOverlay} />
           </Overlay>
+        </li>
+
+        <li>
+          <CheckboxMenu
+            options={[
+              "Personal",
+              "Technical",
+              "Cultural",
+              "Sports",
+              "Academics",
+            ]}
+            value={["Personal", "Technical", "Cultural", "Sports", "Academics"]}
+            onChange={onCheckboxChange}
+          />
         </li>
       </ul>
     </div>

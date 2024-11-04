@@ -17,11 +17,6 @@ const MenuBarData = [
     link: "/dayview",
   },
   {
-    title: "filter",
-    path: "../../photos/icons_menu_bar/iconoir--filter-solid.svg",
-    link: "/filter",
-  },
-  {
     title: "monthview",
     path: "../../photos/icons_menu_bar/material-symbols-light--calendar-view-month.svg",
     link: "/monthview",
