@@ -1,23 +1,18 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./components.css";
 
-function Overlay({ isOpen, onClose, children }) {
+export function Overlay({ isOpen, onClose, children }) {
   return (
-    <div>
-      {isOpen ? (
+    <Fragment>
+      {isOpen && (
         <div className="overlay">
-          <div className="overlay-background" onClick={onClose}>
-            <div className="overlay-container">{children}</div>
-            <div className="overlay-controls">
-              <button className="overlay-close" onClick={onClose}>
-                X
-              </button>
-            </div>
-            {children}
+          <div className="overlay-background" onClick={onClose} />
+          <div className="overlay-container">
+            {React.cloneElement(children, { onClose })}
           </div>
         </div>
-      ) : null}
-    </div>
+      )}
+    </Fragment>
   );
 }
 

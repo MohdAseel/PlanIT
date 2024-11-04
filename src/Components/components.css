@@ -114,7 +114,7 @@ body {
 
 .card-whole-container {
     display: flex;
-    justify-content:space-around;
+    justify-content:flex-start;
     margin-bottom: 20px;
     flex-basis: content;
     flex-wrap: wrap;
@@ -158,7 +158,9 @@ body {
  .event-card-container {
     display: flex;
     justify-content:space-evenly;
-    flex-wrap: wrap; }
+    flex-wrap: wrap; 
+   margin-left: 20px;
+   gap:20px;}
 
 
 .event-card {
@@ -170,36 +172,148 @@ body {
     border-radius: 10px;
     padding: 20px;
     width: 300px;
+    
+}    
 
+.event-card-expanded {
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    width:800px;
+
+    
 }
+ .event-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+ }
 
-.event-card h2 {
+
+.event-title {
     font-family: 'Peace Sans';
     font-weight: 100;
     font-size: 24px;
     color: #151750;
-}
+}    
 
-.event-card h3 {
+.event-time {
     font-family: 'glacial indifference';
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
     text-align: right;
     color: #151750;
-}
+}    
 
-.event-card img {
+.event-image {
     width: 250px;
     height: 250px;
     align-self: center;
     border-radius: 8px;
-}
+}    
 
-.event-card .description {
-    margin: 10px 0;
+.event-description {
+    margin: 10px;
     font-size: 14px;
     color: #555;
+}   
+
+.event-card-expanded-splitter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    
+}
+.event-card-expanded-splitter-right{
+    flex: 1;
+    
+}
+
+.event-card-expanded-splitter-left{
+    flex: 1;
 }
 
 
+.overlay-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 9;
+  }
+  
+  .overlay-container {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 10;
+    padding: 30px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 16px;
+    cursor: default;
+  }
+  
+  .overlay-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .overlay-close:after {
+    display: inline-block;
+  }
 
+
+/* dual button styling */
+  
+
+
+.dual-botton-container {
+    display: inline-flex;
+    
+    overflow: hidden; /* Ensures rounded corners on hover */
+    align-self: flex-end;
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+  
+
+  
+  /* Left button styling */
+  .btn-left {
+      font-family: 'glacial indifference';
+      background-color: #C2CBF8 ;/* Light blue background */
+   color: #151750; /* Dark navy text color */
+   height: fit-content;
+   border-radius: 16px 0px 0px 16px;
+   padding: 8px 16px; /* Add padding to the text inside the button */
+   border: none;
+   cursor: pointer;
+
+
+  }
+  
+
+  
+  /* Right button styling */
+  .btn-right {
+    background-color: #0a0a56; /* Dark navy background */
+    color: #fff; /* White text color */
+       font-family: 'glacial indifference';
+       height: fit-content;
+   border-radius: 0px 16px 16px 0px;
+   padding: 8px 16px; /* Add padding to the text inside the button */
+    border: none;
+    cursor: pointer;
+  }

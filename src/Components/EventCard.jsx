@@ -1,7 +1,10 @@
-import React from "react";
+import { React, useState } from "react";
 import EventData from "./EventData";
 import "./components.css";
-const EventCard = (props) => {
+import EventCardExpanded from "./EventCardExpanded";
+import Overlay from "./Overlay";
+
+function EventCard(props) {
   //props will have return an object with
   //event id is clubid +4numbers
   //fetch event data from eventid from EventData
@@ -14,24 +17,36 @@ const EventCard = (props) => {
   //   description: "This is the first event of the AI Club of IIT Madras",
   //   image: "../../photos/images.png",
   const data = props.data;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOverlay = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div>
       <div className="event-card">
-        <h2>{data.title}</h2>
-        <h3>
+        <h2 className="event-title">{data.title}</h2>
+        <h2 className="event-time">
           {data.time}
           <br />
           {data.date}
-        </h3>
-        <img src={data.image} alt="Event Image" />
-        <p className="description">{data.description}</p>
-        <div className="buttons">
-          <button className="button add-event">Add Event</button>
-          <button className="button learn-more">Learn More</button>
+        </h2>
+        <img className="event-image" src={data.image} alt="Event Image" />
+        <p className="event-description">{data.description}</p>
+        <div className="dual-botton-container">
+          <button className="btn-left">Add Event</button>
+          <button className="btn-right" onClick={toggleOverlay}>
+            Learn More
+          </button>
+          <Overlay isOpen={isOpen} onClose={toggleOverlay}>
+            <EventCardExpanded data={data} />
+          </Overlay>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default EventCard;
