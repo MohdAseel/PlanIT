@@ -17,8 +17,7 @@ function LoginPage() {
     });
 
     if (response.ok) {
-      alert("Login successful!");
-      // Redirect to another page if needed
+      navigate("/weekview"); 
     } else {
       alert("Invalid credentials.");
     }
