@@ -10,7 +10,7 @@ import LoginPage from "./Pages/LoginPage.jsx";
 import DayView from "./Pages/DayView.jsx";
 import ERROR404 from "./Pages/ERROR404.jsx";
 import MonthView from "./Pages/MonthView.jsx";
-import ClubPage from "./Components/clubpage.jsx";
+import ClubPage from "./Components/Clubpage.jsx";
 
 export default function App() {
   return (
