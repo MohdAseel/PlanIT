@@ -1,25 +1,22 @@
 import React, { useState } from "react";
-import MenuBarData from "./MenuBarData";
 import { Link } from "react-router-dom";
-import "./components.css";
 import Overlay from "./Overlay";
 import CreateEvent from "./CreateEvent";
-
+import CheckboxMenu from "./CheckBoxMenu";
+import MenuBarData from "./MenuBarData";
 import { Input } from "antd";
 
-import CheckboxMenu from "./CheckBoxMenu";
+import "./components.css";
 
-const MenuBar = (props) => {
-  const currentPage = props.props;
+const MenuBar = ({ onCheckboxChange, currentPage }) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   const toggleOverlay = () => {
     setIsOverlayOpen(!isOverlayOpen);
   };
 
-  //<--for filter-->
-  const onCheckboxChange = (selection) => {
-    console.log(selection);
+  const onCheckboxChangeMenu = (selection) => {
+    onCheckboxChange(selection); // Call the onCheckboxChange function passed from the parent
   };
 
   return (
@@ -36,23 +33,17 @@ const MenuBar = (props) => {
             )}
           </div>
         ))}
-        {/* {
-title: "addevent",
-path: "../../photos/icons_menu_bar/basil--add-solid.svg",
-link: "/addevent",
-}, */}
         <li>
           <img
             src="../../photos/icons_menu_bar/basil--add-solid.svg"
             alt="addevent"
             onClick={toggleOverlay}
-            script="cursor:pointer"
+            style={{ cursor: "pointer" }}
           />
           <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
             <CreateEvent isOpen={isOverlayOpen} onClose={toggleOverlay} />
           </Overlay>
         </li>
-
         <li>
           <CheckboxMenu
             options={[
@@ -63,7 +54,7 @@ link: "/addevent",
               "Academics",
             ]}
             value={["Personal", "Technical", "Cultural", "Sports", "Academics"]}
-            onChange={onCheckboxChange}
+            onChange={onCheckboxChangeMenu} // Pass the onCheckboxChangeMenu function
           />
         </li>
       </ul>
