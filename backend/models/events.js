@@ -1,14 +1,21 @@
 const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema({
+    clubId: { type: String, required: true },
+    id: { type: String, required: true },
     title: { type: String, required: true },
-    description: { type: String },
     date: { type: Date, required: true },
     time: { type: String },
     location: { type: String },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    createdAt: { type: Date, default: Date.now }
-  });
-  
-  const Event = mongoose.model('Event', eventSchema);
-  module.exports = Event;
+    description: { type: String },
+    image: { type: String } // Store image URL as a string
+});
+
+const Event = mongoose.model('Event', eventSchema);
+module.exports = Event;
+
+
+// datetime: { type: Date, required: true },
+
+// const datetimeString = "2023-10-05 14:30";
+// const datetime = new Date(datetimeString);
