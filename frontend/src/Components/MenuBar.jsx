@@ -22,41 +22,43 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
   return (
     <div className="MenuBar">
       <ul>
-        {MenuBarData.map((item, key) => (
-          <div key={key}>
-            {currentPage === item.title ? null : (
-              <li>
-                <Link to={item.link}>
-                  <img src={item.path} alt={item.title} />
-                </Link>
-              </li>
-            )}
-          </div>
-        ))}
-        <li>
-          <img
-            src="../../photos/icons_menu_bar/basil--add-solid.svg"
-            alt="addevent"
-            onClick={toggleOverlay}
-            style={{ cursor: "pointer" }}
-          />
-          <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
-            <CreateEvent isOpen={isOverlayOpen} onClose={toggleOverlay} />
-          </Overlay>
-        </li>
-        <li>
-          <CheckboxMenu
-            options={[
-              "Personal",
-              "Technical",
-              "Cultural",
-              "Sports",
-              "Academics",
-            ]}
-            value={["Personal", "Technical", "Cultural", "Sports", "Academics"]}
-            onChange={onCheckboxChangeMenu} // Pass the onCheckboxChangeMenu function
-          />
-        </li>
+        {currentPage === "monthview" ||
+        currentPage === "dayview" ||
+        currentPage === "weekview" ? (
+          <>
+            <li>
+              <img
+                src="../../photos/icons_menu_bar/basil--add-solid.svg"
+                alt="addevent"
+                onClick={toggleOverlay}
+                style={{ cursor: "pointer" }}
+              />
+              <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
+                <CreateEvent isOpen={isOverlayOpen} onClose={toggleOverlay} />
+              </Overlay>
+            </li>
+            <li>
+              <CheckboxMenu
+                options={[
+                  "Personal",
+                  "Technical",
+                  "Cultural",
+                  "Sports",
+                  "Academics",
+                ]}
+                value={[
+                  "Personal",
+                  "Technical",
+                  "Cultural",
+                  "Sports",
+                  "Academics",
+                ]}
+                onChange={onCheckboxChangeMenu} // Pass the onCheckboxChangeMenu function
+              />
+            </li>
+          </>
+        ) : null}
+        <li></li>
       </ul>
     </div>
   );
