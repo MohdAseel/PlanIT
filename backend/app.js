@@ -2,6 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Event = require('./models/events');
+<<<<<<< HEAD
+=======
+const User = require('./models/User');
+const UserEvent = require('./models/userevents');
+>>>>>>> 2099bd6182e1c20ea97457594150d05060a0e8f1
 
 const app = express();
 app.use(express.json());

@@ -317,3 +317,19 @@ body {
     border: none;
     cursor: pointer;
   }
+
+
+.create-event-container {
+    margin:10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+
+}
+
+.Button {
+    
+    width: 40%;
+}
+
