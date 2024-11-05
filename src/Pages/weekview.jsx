@@ -9,6 +9,10 @@ import "./pagestyle/calendarpagestyle.css";
 import "./pagestyle/pagestyle.css";
 
 function WeekView() {
+  const handleCheckboxChange = (selection) => {
+    console.log("Selected categories:", selection);
+  };
+
   const calendar = useCalendarApp({
     views: [createViewWeek()],
     events: [
@@ -30,7 +34,10 @@ function WeekView() {
         <ScheduleXCalendar calendarApp={calendar} />
       </div>
       <div className="menubar-container">
-        <MenuBar props="weekview" />
+        <MenuBar
+          currentPage={"weekview"}
+          onCheckboxChange={handleCheckboxChange}
+        />
       </div>
     </div>
   );

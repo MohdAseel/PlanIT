@@ -19,7 +19,7 @@ export default function Technical() {
         <Clubcards data={technicalData} />
       </div>
       <div className="menubar-container">
-        <MenuBar />
+        <MenuBar currentPage={"dayview"} />
       </div>
     </div>
   );

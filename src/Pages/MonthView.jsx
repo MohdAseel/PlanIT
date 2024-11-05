@@ -9,6 +9,10 @@ import "./pagestyle/calendarpagestyle.css";
 import "./pagestyle/pagestyle.css";
 
 function MonthView() {
+  const handleCheckboxChange = (selection) => {
+    console.log("Selected categories:", selection);
+  };
+
   const calendar = useCalendarApp({
     views: [createViewMonthGrid()],
     events: [
@@ -36,7 +40,10 @@ function MonthView() {
         <ScheduleXCalendar calendarApp={calendar} />
       </div>
       <div className="menubar-container">
-        <MenuBar props="monthview" />
+        <MenuBar
+          currentPage={"monthview"}
+          onCheckboxChange={handleCheckboxChange}
+        />
       </div>
     </div>
   );

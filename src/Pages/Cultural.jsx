@@ -19,7 +19,7 @@ export default function Cultural() {
         <Clubcards data={culturalData} />
       </div>
       <div className="menubar-container">
-        <MenuBar />
+        <MenuBar currentPage={"cultural"} />
       </div>
     </div>
   );

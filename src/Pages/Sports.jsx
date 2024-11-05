@@ -19,7 +19,7 @@ export default function Sports() {
         <Clubcards data={sportsData} />
       </div>
       <div className="menubar-container">
-        <MenuBar />
+        <MenuBar currentPage={"sports"} />
       </div>
     </div>
   );
