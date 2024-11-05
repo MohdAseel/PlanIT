@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import LoginPage from "./Pages/LoginPage.jsx";
 import Sports from "./Pages/Sports";
 import Technical from "./Pages/Technical";
 import Cultural from "./Pages/Cultural";
@@ -11,13 +12,17 @@ import DayView from "./Pages/DayView.jsx";
 import ERROR404 from "./Pages/ERROR404.jsx";
 import MonthView from "./Pages/MonthView.jsx";
 import ClubPage from "./Components/clubpage.jsx";
+import Pagedata from "./Pages/pagedata/PageData.jsx";
 
 export default function App() {
+  const all_event_pages = [];
+  const Ai_club = <ClubPage id="TAIC" />;
+
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/dayview" element={<DayView />} />
           <Route path="/weekview" element={<WeekView />} />
           <Route path="/sports" element={<Sports />} />
