@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import SideBar from "../Components/Sidebar.jsx";
-import MenuBar from "../Components/MenuBar";
+import MenuBar from "../Components/MenuBar.jsx";
 import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
 import { createViewDay } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
@@ -9,6 +9,10 @@ import "./pagestyle/calendarpagestyle.css";
 import "./pagestyle/pagestyle.css";
 
 function DayView() {
+  const handleCheckboxChange = (selection) => {
+    console.log("Selected categories:", selection);
+  };
+
   const calendar = useCalendarApp({
     views: [createViewDay()],
     events: [
@@ -36,7 +40,10 @@ function DayView() {
         <ScheduleXCalendar calendarApp={calendar} />
       </div>
       <div className="menubar-container">
-        <MenuBar props="dayview" />
+        <MenuBar
+          currentPage={"dayview"}
+          onCheckboxChange={handleCheckboxChange}
+        />
       </div>
     </div>
   );

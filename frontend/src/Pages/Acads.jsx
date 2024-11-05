@@ -246,7 +246,7 @@ function Acads() {
         </div>
       </div>
       <div className="menubar-container">
-        <MenuBar />
+        <MenuBar currentPage={"acads"} />
       </div>
     </div>
   );

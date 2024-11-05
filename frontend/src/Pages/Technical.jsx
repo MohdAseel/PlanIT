@@ -5,8 +5,8 @@ import "./pagestyle/pagestyle.css";
 import PagedataFetcher from "./pagedata/PageData";
 import Clubcards from "../Components/clubcards";
 
-export default function Sports() {
-  const sportsData = PagedataFetcher({ sphere: "Sports" });
+export default function Technical() {
+  const technicalData = PagedataFetcher({ sphere: "Technical" });
 
   return (
     <div className="page-container">
@@ -14,12 +14,12 @@ export default function Sports() {
         <Sidebar />
       </div>
       <div className="main-content">
-        <h1>Sports</h1>
-        <p>All the insti sports stuff</p>
-        <Clubcards data={sportsData} />
+        <h1>Technical</h1>
+        <p>All the insti technical stuff</p>
+        <Clubcards data={technicalData} />
       </div>
       <div className="menubar-container">
-        <MenuBar />
+        <MenuBar currentPage={"dayview"} />
       </div>
     </div>
   );
