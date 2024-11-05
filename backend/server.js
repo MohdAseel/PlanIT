@@ -17,7 +17,7 @@ mongoose.connect('mongodb://localhost:27017/IITM_Login')
     .catch(err => console.error('MongoDB connection error:', err));
 
 // Login route
-app.post('/login', async (req, res) => {
+app.post('/', async (req, res) => {
     const {email, password} = req.body;
 
     try {
