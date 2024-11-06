@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Overlay from "./Overlay";
 import CreateEvent from "./CreateEvent";
 import CheckboxMenu from "./CheckBoxMenu";
-import MenuBarData from "./MenuBarData";
 import { Input } from "antd";
 
 import "./components.css";
