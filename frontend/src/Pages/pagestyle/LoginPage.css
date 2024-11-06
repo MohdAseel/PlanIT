@@ -1,67 +1,58 @@
-body {
-    margin: 0;
-    min-height: 100vh;
-    background-color: #151750;
-    font-family: sans-serif;
-    position: relative;  /* Add this */
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #151750;
 }
 
-/* Add a new class for the background */
-.background-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: blue;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 1;  /* Lower z-index for background */
-}
-.login-page{
-    display:flex ;
-    justify-content: center;
-    align-items: center;
-}
-.header-login-container {
-    flex-grow: 3;
-
-   
-
-   display: flex;
+.header-container {
+  flex: 2; /* Take up twice the width of .login-container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Make sure login container has a background */
-.login-container {
-    flex-grow: 1;
-
-    background-color: white;  /* Add this */
-    padding: 20px;  /* Add this */
-    border-radius: 10px;  /* Optional: for rounded corners */
-}
 .page-header {
-    text-align: center; /* Center-align the text in the header */
-    margin-right: 50px; /* Adjust space if needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .main-heading {
-    font-size: 75px; /* Larger font size for "PLANIT" */
-    color: white;
-    font-weight: bold;
-    margin-right: 250px;
-    margin-bottom: 10px; /* Reduced margin to decrease space */
-    font-family: 'Peace Sans'; /* Heading font */
+  font-family: 'Peace Sans'; /* Heading font */
+  font-size: 75px; /* Larger font size for "PLANIT" */
+  text-align: center;
+  color: white;
+  margin: 5px;
+  font-weight: bold;
 }
 
 .tagline {
-    font-size: 18px; /* Smaller font size for the tagline */
-    color: white;
-    margin: 0px 250px 10px 0px; /* Reduced top margin */
-    font-family: 'glacial indifference';
+  font-size: 18px; /* Smaller font size for the tagline */
+  text-align: center;
+  color: white;
+  margin: 5px;
+  font-family: 'glacial indifference';
 }
 
 .login-container {
-    width: 300px;
+  flex: 1; /* Take up half the width of .header-container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white; /* Add this */
+  border-radius: 16px; /* Add border radius */
 }
 
 fieldset {
@@ -82,6 +73,7 @@ fieldset {
 }
 
 .right-align {
+  
     display: block;
     text-align: left;
     font-size: 16px;
