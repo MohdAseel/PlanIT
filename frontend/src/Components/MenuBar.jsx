@@ -71,3 +71,9 @@ export default MenuBar;
  * to know which page it is display the function accordingly
  *
  */
+
+/**
+ * so now menubar is going to get props
+ * to know which page it is display the function accordingly
+ *
+ */
