@@ -189,9 +189,9 @@ const Login = ({ isUserAuthenticated }) => {
   const imageURL =
     "https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png";
 
-  // useEffect(() => {
-  //   showError(false);
-  // }, [login]);
+  useEffect(() => {
+    showError(false);
+  }, [login]);
 
   const onValueChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -217,10 +217,12 @@ const Login = ({ isUserAuthenticated }) => {
       setAccount({
         name: response.data.name,
         email: response.data.email,
+        roles: response.data.roles,
+        class: response.data.class,
       });
 
       isUserAuthenticated(true);
-      // setLogin(loginInitialValues);
+      setLogin(loginInitialValues);
       navigate("/weekview");
     } else {
       showError("Something went wrong! please try again later");
@@ -253,20 +255,12 @@ const Login = ({ isUserAuthenticated }) => {
               value={login.email}
               onChange={(e) => onValueChange(e)}
               name="email"
-              rules={[
-                {
-                  type: "email",
-                  required: true,
-                  message: "Please input your Email!",
-                },
-              ]}
-            >
-              <Input
-                prefix={<MailOutlined />}
-                placeholder="rolln@smail.iitm.ac.in"
-              />
-            </Form.Item>
-            <Form.Item
+              label="Enter Email"
+            />
+            <TextField
+              variant="standard"
+              value={login.password}
+              onChange={(e) => onValueChange(e)}
               name="password"
               label="Enter Password"
             />
