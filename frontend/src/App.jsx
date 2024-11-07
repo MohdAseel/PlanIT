@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import EventCard from "./Components/EventCard.jsx";
+import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,

@@ -68,3 +68,4 @@ const logoutUser = async (request, response) => {
   response.status(200).json({ message: "Logout successfully" });
 };
 module.exports = { signupUser, loginUser, logoutUser }; // Export the signupUser function
+

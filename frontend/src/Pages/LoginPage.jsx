@@ -248,25 +248,18 @@ const Login = ({ isUserAuthenticated }) => {
         <Image src={imageURL} alt="blog" />
         {account === "login" ? (
           <Wrapper>
-            <TextField
+            
+              <TextField
               variant="standard"
               value={login.email}
               onChange={(e) => onValueChange(e)}
               name="email"
-              rules={[
-                {
-                  type: "email",
-                  required: true,
-                  message: "Please input your Email!",
-                },
-              ]}
-            >
-              <Input
-                prefix={<MailOutlined />}
-                placeholder="rolln@smail.iitm.ac.in"
-              />
-            </Form.Item>
-            <Form.Item
+              label="Enter email"
+            />
+            <TextField
+              variant="standard"
+              value={login.password}
+              onChange={(e) => onValueChange(e)}
               name="password"
               label="Enter Password"
             />

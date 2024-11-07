@@ -8,14 +8,8 @@ const eventSchema = new mongoose.Schema({
     time: { type: String },
     location: { type: String },
     description: { type: String },
-    image: { type: String } // Store image URL as a string
+    image: { type: String } 
 });
 
 const Event = mongoose.model('Event', eventSchema);
 module.exports = Event;
-
-
-// datetime: { type: Date, required: true },
-
-// const datetimeString = "2023-10-05 14:30";
-// const datetime = new Date(datetimeString);
