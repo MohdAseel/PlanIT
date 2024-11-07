@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Event = require('./models/events');
-const User = require('./models/User');
+const User = require('./models/user');
 const UserEvent = require('./models/userevents');
 
 const app = express();

@@ -1,104 +1,312 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { useUser } from "../UserContext";
+// import "./pagestyle/LoginPage.css";
+// import { Form, Input, Button } from "antd";
+// import { MailOutlined, LockOutlined } from "@ant-design/icons";
+
+// function LoginPage() {
+//   // const [email, setEmail] = useState("");
+//   // const [password, setPassword] = useState("");
+//   // const navigate = useNavigate();
+
+//   // const handleLogin = async (e) => {
+//   //   e.preventDefault();
+//   //   const response = await fetch("http://localhost:3000", {
+//   //     method: "POST",
+//   //     headers: { "Content-Type": "application/json" },
+//   //     body: JSON.stringify({ email, password }),
+//   //   });
+
+//   //   const data = await response.json();
+
+//   //   if (response.ok) {
+//   //     navigate("/weekview");
+//   //   } else {
+//   //     alert("Invalid credentials.");
+//   //   }
+//   // };
+//   const onFinish = (e) => {
+//     console.log(e);
+//   };
+
+//   return (
+//     <div className="login-page">
+//       <div className="header-container">
+//         <div className="page-header">
+//           <h1 className="main-heading">PLANIT</h1>
+//           <p className="tagline">
+//             From Deadlines to Socials, We’ve Got <br />
+//             You Covered
+//           </p>
+//         </div>
+//       </div>
+//       <div className="login-container">
+//         <div className="login-box">
+//           <h1 className="login-heading">Log in</h1>
+//           <Form
+//             name="normal_login"
+//             initialValues={{
+//               remember: true,
+//             }}
+//             onFinish={onFinish}
+//             layout="vertical"
+//             requiredMark="optional"
+//           >
+//             <Form.Item
+//               name="email"
+//               rules={[
+//                 {
+//                   type: "email",
+//                   required: true,
+//                   message: "Please input your Email!",
+//                 },
+//               ]}
+//             >
+//               <Input
+//                 prefix={<MailOutlined />}
+//                 placeholder="rolln@smail.iitm.ac.in"
+//               />
+//             </Form.Item>
+//             <Form.Item
+//               name="password"
+//               rules={[
+//                 {
+//                   required: true,
+//                   message: "Please input your Password!",
+//                 },
+//               ]}
+//             >
+//               <Input.Password
+//                 prefix={<LockOutlined />}
+//                 type="password"
+//                 placeholder="Password"
+//               />
+//             </Form.Item>
+
+//             <Form.Item style={{ marginBottom: "0px" }}>
+//               <Button
+//                 block="true"
+//                 type="primary"
+//                 color="#151750"
+//                 htmlType="submit"
+//               >
+//                 Log In
+//               </Button>
+//             </Form.Item>
+//           </Form>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default LoginPage;
+import React, { useState, useEffect, useContext } from "react";
+
+import { TextField, Box, Button, Typography, styled } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../UserContext";
-import "./pagestyle/LoginPage.css";
-import { Form, Input, Button } from "antd";
-import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
-function LoginPage() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
+import { API } from "../service/api";
+import { DataContext } from "../context/DataProvider";
 
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   const response = await fetch("http://localhost:3000", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ email, password }),
-  //   });
+const Component = styled(Box)`
+  width: 400px;
+  margin: auto;
+  box-shadow: 5px 2px 5px 2px rgb(0 0 0/ 0.6);
+`;
 
-  //   const data = await response.json();
+const Image = styled("img")({
+  width: 100,
+  display: "flex",
+  margin: "auto",
+  padding: "50px 0 0",
+});
 
-  //   if (response.ok) {
-  //     navigate("/weekview");
-  //   } else {
-  //     alert("Invalid credentials.");
-  //   }
-  // };
-  const onFinish = (e) => {
-    console.log(e);
+const Wrapper = styled(Box)`
+  padding: 25px 35px;
+  display: flex;
+  flex: 1;
+  overflow: auto;
+  flex-direction: column;
+  & > div,
+  & > button,
+  & > p {
+    margin-top: 20px;
+  }
+`;
+
+const LoginButton = styled(Button)`
+  text-transform: none;
+  background: #fb641b;
+  color: #fff;
+  height: 48px;
+  border-radius: 2px;
+`;
+
+const SignupButton = styled(Button)`
+  text-transform: none;
+  background: #fff;
+  color: #2874f0;
+  height: 48px;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+`;
+
+const Text = styled(Typography)`
+  color: #878787;
+  font-size: 12px;
+`;
+
+const Error = styled(Typography)`
+  font-size: 10px;
+  color: #ff6161;
+  line-height: 0;
+  margin-top: 10px;
+  font-weight: 600;
+`;
+
+const loginInitialValues = {
+  email: "",
+  password: "",
+};
+
+const signupInitialValues = {
+  name: "",
+  email: "",
+  password: "",
+};
+
+const Login = ({ isUserAuthenticated }) => {
+  const [login, setLogin] = useState(loginInitialValues);
+  const [signup, setSignup] = useState(signupInitialValues);
+  const [error, showError] = useState("");
+  const [account, toggleAccount] = useState("login");
+
+  const navigate = useNavigate();
+  const { setAccount } = useContext(DataContext);
+
+  const imageURL =
+    "https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png";
+
+  // useEffect(() => {
+  //   showError(false);
+  // }, [login]);
+
+  const onValueChange = (e) => {
+    setLogin({ ...login, [e.target.name]: e.target.value });
+  };
+
+  const onInputChange = (e) => {
+    setSignup({ ...signup, [e.target.name]: e.target.value });
+  };
+
+  const loginUser = async () => {
+    let response = await API.userLogin(login);
+    if (response.isSuccess) {
+      showError("");
+
+      sessionStorage.setItem(
+        "accessToken",
+        `Bearer ${response.data.accessToken}`
+      );
+      sessionStorage.setItem(
+        "refreshToken",
+        `Bearer ${response.data.refreshToken}`
+      );
+      setAccount({
+        name: response.data.name,
+        email: response.data.email,
+      });
+
+      isUserAuthenticated(true);
+      // setLogin(loginInitialValues);
+      navigate("/weekview");
+    } else {
+      showError("Something went wrong! please try again later");
+    }
+  };
+
+  const signupUser = async () => {
+    let response = await API.userSignup(signup);
+    if (response.isSuccess) {
+      showError("");
+      setSignup(signupInitialValues);
+      toggleAccount("login");
+    } else {
+      showError("Something went wrong! please try again later");
+    }
+  };
+
+  const toggleSignup = () => {
+    account === "signup" ? toggleAccount("login") : toggleAccount("signup");
   };
 
   return (
-    <div className="login-page">
-      <div className="header-container">
-        <div className="page-header">
-          <h1 className="main-heading">PLANIT</h1>
-          <p className="tagline">
-            From Deadlines to Socials, We’ve Got <br />
-            You Covered
-          </p>
-        </div>
-      </div>
-      <div className="login-container">
-        <div className="login-box">
-          <h1 className="login-heading">Log in</h1>
-          <Form
-            name="normal_login"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            layout="vertical"
-            requiredMark="optional"
-          >
-            <Form.Item
+    <Component>
+      <Box>
+        <Image src={imageURL} alt="blog" />
+        {account === "login" ? (
+          <Wrapper>
+            <TextField
+              variant="standard"
+              value={login.email}
+              onChange={(e) => onValueChange(e)}
               name="email"
-              rules={[
-                {
-                  type: "email",
-                  required: true,
-                  message: "Please input your Email!",
-                },
-              ]}
-            >
-              <Input
-                prefix={<MailOutlined />}
-                placeholder="rolln@smail.iitm.ac.in"
-              />
-            </Form.Item>
-            <Form.Item
+              label="Enter email"
+            />
+            <TextField
+              variant="standard"
+              value={login.password}
+              onChange={(e) => onValueChange(e)}
               name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Password!",
-                },
-              ]}
+              label="Enter Password"
+            />
+
+            {error && <Error>{error}</Error>}
+
+            <LoginButton variant="contained" onClick={() => loginUser()}>
+              Login
+            </LoginButton>
+            <Text style={{ textAlign: "center" }}>OR</Text>
+            <SignupButton
+              onClick={() => toggleSignup()}
+              style={{ marginBottom: 50 }}
             >
-              <Input.Password
-                prefix={<LockOutlined />}
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Item>
+              Create an account
+            </SignupButton>
+          </Wrapper>
+        ) : (
+          <Wrapper>
+            <TextField
+              variant="standard"
+              onChange={(e) => onInputChange(e)}
+              name="name"
+              label="Enter Name"
+            />
+            <TextField
+              variant="standard"
+              onChange={(e) => onInputChange(e)}
+              name="email"
+              label="Enter email"
+            />
+            <TextField
+              variant="standard"
+              onChange={(e) => onInputChange(e)}
+              name="password"
+              label="Enter Password"
+            />
 
-            <Form.Item style={{ marginBottom: "0px" }}>
-              <Button
-                block="true"
-                type="primary"
-                color="#151750"
-                htmlType="submit"
-              >
-                Log In
-              </Button>
-            </Form.Item>
-          </Form>
-        </div>
-      </div>
-    </div>
+            <SignupButton onClick={() => signupUser()}>Signup</SignupButton>
+            <Text style={{ textAlign: "center" }}>OR</Text>
+            <LoginButton variant="contained" onClick={() => toggleSignup()}>
+              Already have an account
+            </LoginButton>
+          </Wrapper>
+        )}
+      </Box>
+    </Component>
   );
-}
+};
 
-export default LoginPage;
+export default Login;

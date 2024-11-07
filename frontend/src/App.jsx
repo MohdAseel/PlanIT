@@ -1,5 +1,11 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 import "./App.css";
 import LoginPage from "./Pages/LoginPage.jsx";
 import Sports from "./Pages/Sports.jsx";
@@ -12,14 +18,24 @@ import ERROR404 from "./Pages/ERROR404.jsx";
 import MonthView from "./Pages/MonthView.jsx";
 import ClubPage from "./Components/Clubpage.jsx";
 import Pagedata from "./Pages/pagedata/PageData.jsx";
+import DataProvider from "./context/DataProvider.jsx";
 
 export default function App() {
-  const all_event_pages = [];
-  const Ai_club = <ClubPage id="TAIC" />;
+  const [isAuthenticated, isUserAuthenticated] = useState(false);
+
+  const PrivateRoute = ({ isUserAuthenticated, ...props }) => {
+    return isAuthenticated ? (
+      <>
+        <Outlet />
+      </>
+    ) : (
+      <Navigate replace to="/login" />
+    );
+  };
 
   return (
-    <div className="App">
-      <Router>
+    <DataProvider>
+      {/* <Router>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/dayview" element={<DayView />} />
@@ -33,7 +49,69 @@ export default function App() {
           <Route path="/:clubId" element={<ClubPage />} />
           <Route path="*" element={<ERROR404 />} />
         </Routes>
+      </Router> */}
+      <Router>
+        <Routes>
+          <Route
+            path="/login"
+            element={<LoginPage isUserAuthenticated={isUserAuthenticated} />}
+          ></Route>
+          <Route
+            path="/"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/dayview" element={<DayView />} />
+          </Route>
+          <Route
+            path="/"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/weekview" element={<WeekView />} />
+          </Route>
+          <Route
+            path="/"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/sports" element={<Sports />} />
+          </Route>
+          <Route
+            path="/"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/technical" element={<Technical />} />
+          </Route>
+          <Route
+            path="/"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/acads" element={<Acads />} />
+          </Route>
+          <Route
+            path="/"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/cultural" element={<Cultural />} />
+          </Route>
+          <Route
+            path="/"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/monthview" element={<MonthView />} />
+          </Route>
+          <Route
+            path="/"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/:clubId" element={<ClubPage />} />
+          </Route>
+          <Route
+            path="/"
+            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+          >
+            <Route path="/*" element={<ERROR404 />} />
+          </Route>
+        </Routes>
       </Router>
-    </div>
+    </DataProvider>
   );
 }
