@@ -23,7 +23,7 @@ function CreateEvent({ onClose }) {
     onClose();
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.log("Failed", errorInfo);
   };
   return (
     <div className="create-event-container">
@@ -32,10 +32,10 @@ function CreateEvent({ onClose }) {
       <Form
         name="basic"
         labelCol={{
-          span: 5,
+          span: 7,
         }}
         wrapperCol={{
-          span: 22,
+          span: 24,
         }}
         style={{
           maxWidth: 600,
