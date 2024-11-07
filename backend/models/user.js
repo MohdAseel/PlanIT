@@ -8,8 +8,8 @@ const UserSchema = mongoose.Schema({
   // createdAt: { type: Date, default: Date.now }
   role: { type: String, default: "student" },
   class: { type: String, default: "CSE" },
-
-  createdAt: { type: Date, default: Date.now },
+  P_events: { type: Object, default: {} },
+  S_events: { type: Array, default: [] },
 });
 
 const UserModal = mongoose.model("users", UserSchema);

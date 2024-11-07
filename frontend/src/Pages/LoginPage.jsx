@@ -217,7 +217,7 @@ const Login = ({ isUserAuthenticated }) => {
       setAccount({
         name: response.data.name,
         email: response.data.email,
-        roles: response.data.roles,
+        role: response.data.role,
         class: response.data.class,
       });
 
