@@ -196,7 +196,7 @@ function Acads() {
             </div>
           </div>
         </div>
-        <div>
+        <div style={{ textAlign: "center", margin: "10px" }}>
           <Button onClick={toggleOverlay}>Add Class/Assignments</Button>
           <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
             <AddClassAssignment />

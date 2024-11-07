@@ -189,9 +189,9 @@ const Login = ({ isUserAuthenticated }) => {
   const imageURL =
     "https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png";
 
-  // useEffect(() => {
-  //   showError(false);
-  // }, [login]);
+  useEffect(() => {
+    showError(false);
+  }, [login]);
 
   const onValueChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -217,10 +217,12 @@ const Login = ({ isUserAuthenticated }) => {
       setAccount({
         name: response.data.name,
         email: response.data.email,
+        role: response.data.role,
+        class: response.data.class,
       });
 
       isUserAuthenticated(true);
-      // setLogin(loginInitialValues);
+      setLogin(loginInitialValues);
       navigate("/weekview");
     } else {
       showError("Something went wrong! please try again later");
