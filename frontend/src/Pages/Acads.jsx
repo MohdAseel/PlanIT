@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Sidebar from "../Components/Sidebar";
 import MenuBar from "../Components/MenuBar";
 import "./pagestyle/acadstyle.css";
@@ -6,9 +6,11 @@ import "./pagestyle/pagestyle.css";
 import { DatePicker, Input, Form, Radio, Button } from "antd";
 import dayjs from "dayjs";
 import Overlay from "../Components/Overlay";
+import { DataContext } from "../context/DataProvider";
 
 //<--Academics page
 function Acads() {
+  const { account } = useContext(DataContext);
   function CardAcads(props) {
     return (
       <div className="card-acads">
@@ -30,6 +32,11 @@ function Acads() {
   const format = "YYYY-MM-DD HH:mm";
 
   const onFinish = (e) => {
+    e.bothtime = e.bothtime.map((time) => time.toISOString());
+    e.startdate = e.bothtime[0];
+    e.enddate = e.bothtime[1];
+    e.classname = account.classname;
+    delete e.bothtime;
     console.log(e);
     window.alert("Event Created");
     toggleOverlay();
@@ -62,7 +69,7 @@ function Acads() {
         >
           <Form.Item
             label="Class/Assignment"
-            name="Class/Assignment"
+            name="class_assignment"
             rules={[
               {
                 required: true,
@@ -77,7 +84,7 @@ function Acads() {
           </Form.Item>
           <Form.Item
             label="Course No."
-            name="Course No."
+            name="courseno"
             rules={[
               {
                 required: true,
@@ -90,7 +97,7 @@ function Acads() {
 
           <Form.Item
             label="RangePicker"
-            name="timedate"
+            name="bothtime"
             rules={[
               {
                 required: true,
@@ -109,7 +116,7 @@ function Acads() {
           </Form.Item>
           <Form.Item
             label="Location"
-            name="Location"
+            name="location"
             rules={[
               {
                 required: true,
@@ -122,7 +129,7 @@ function Acads() {
 
           <Form.Item
             label="Description"
-            name="Description"
+            name="description"
             rules={[
               {
                 required: true,
