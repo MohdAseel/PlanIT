@@ -11,4 +11,3 @@ const token = mongoose.model("token", TokenSchema);
 
 module.exports = token;
 
-C;
