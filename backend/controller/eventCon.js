@@ -78,10 +78,6 @@ const createClassEvent = async (req, res) => {
 
     await eventclass.save();
     res.status(201).json(eventclass);
-    await EventCollection.updateOne(
-      { clubId: req.params.clubId },
-      { $push: { eventId: newId } }
-    );
   } catch (error) {
     res.status(500).json({
       error: error.message,

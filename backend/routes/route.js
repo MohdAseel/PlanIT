@@ -19,6 +19,7 @@ const {
 router.post("/signup", signupValidation, signupUser);
 router.post("/login", loginValidation, loginUser);
 router.post("/personal-events", createPersonalEvent);
+router.post("/acads", createClassEvent);
 
 // router.get("/", getAllEvents);
 
