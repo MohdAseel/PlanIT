@@ -7,6 +7,7 @@ const eventClassSchema = new mongoose.Schema({
   enddate: { type: Date, required: true },
   location: { type: String },
   description: { type: String },
+  timestamp: { type: Date, default: Date.now },
 });
 
 module.exports = eventClassSchema;

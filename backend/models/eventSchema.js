@@ -9,6 +9,7 @@ const eventSchema = new mongoose.Schema({
   location: { type: String },
   description: { type: String },
   image: { type: String },
+  timestamp: { type: Date, default: Date.now }
 });
 
 module.exports = eventSchema;
