@@ -10,6 +10,7 @@ const {
   createEvent,
   updateEvent,
   deleteEvent,
+  createClassEvent,
 } = require("../controller/eventCon.js");
 
 const router = express.Router();
@@ -18,6 +19,7 @@ router.post("/signup", signupValidation, signupUser);
 router.post("/login", loginValidation, loginUser);
 
 router.get("/", getAllEvents);
+router.post("/acads", createClassEvent);
 
 router.get("/:id", getEventById);
 
