@@ -73,23 +73,3 @@ const logoutUser = async (request, response) => {
   response.status(200).json({ message: "Logout successfully" });
 };
 module.exports = { signupUser, loginUser, logoutUser }; // Export the signupUser function
-
-// Controller to fetch event IDs based on email
-const getEventIdsByEmail = async (req, res) => {
-  try {
-    const { email } = req.query; // Retrieve the user's email from query params
-    const user = await UserModal.findOne({ email }); // Find the user by email
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Return the event IDs stored in the user's Scheduled_events
-    const eventIds = user.Scheduled_events;
-    res.status(200).json({ eventIds });
-  } catch (err) {
-    console.error("Error fetching event IDs:", err);
-    res.status(500).json({ message: "Server error" });
-  }
-};
-module.exports = {getEventIdsByEmail};
