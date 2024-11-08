@@ -1,3 +1,41 @@
+// app.js or index.js
+const express = require("express");
+const mongoose = require("mongoose");
+const User = require("./models/user"); // Import the User model
+const app = express();
+
+app.use(express.json()); // Middleware to parse JSON requests
+
+// Define the endpoint for adding events
+app.post("/api/user/addEvent", async (req, res) => {
+  const { email, eventId } = req.body;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if the event is already in scheduled_events
+    if (user.scheduled_events.includes(eventId)) {
+      return res.status(400).json({ message: "Event already added" });
+    }
+
+    // Add the event to the user's scheduled_events
+    user.scheduled_events.push(eventId);
+    await user.save();
+
+    res.status(200).json({ message: "Event added successfully" });
+  } catch (error) {
+    console.error("Error adding event:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+module.exports = app;
+
+
 /*const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");

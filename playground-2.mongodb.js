@@ -2,15 +2,18 @@
 // MongoDB Playground
 // Use Ctrl+Space inside a snippet or a string literal to trigger completions.
 
-const database = 'auth-db';
-const collection = 'users';
+// Replace with the relevant database name and collection
+use("iitm");
 
-use(database);
-db.users.insertMany([
-    { : "student1@smail.iitm.ac.in", password: "password1", role: "normal" },
-    { email: "student2@smail.iitm.ac.in", password: "password2", role: "normal" },
-    { email: "student3@smail.iitm.ac.in", password: "password3", role: "head" },
-    { email: "student4@smail.iitm.ac.in", password: "password4", role: "normal" },
-    { email: "student5@smail.iitm.ac.in", password: "password5", role: "head" },
-  ])
-  
+// Update query
+db.getCollection("User").updateOne(
+  { _id: ObjectId("672e47836d63e8b43daa4ec9") },  // Use the specific _id of the document
+  {
+    $set: {
+      scheduled_events: [
+        { eventId: "TAIC0001" },
+        { eventId: "TAIC0002" }
+      ]
+    }
+  }
+);

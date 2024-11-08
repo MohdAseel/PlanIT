@@ -1,6 +1,6 @@
 const eventSchema = require("../models/eventSchema.js");
 const eventClassSchema = require("../models/acadevent.js");
-const User = require("../models/User.js"); // Correctly import User model
+const User = require("../models/user.js"); // Correctly import User model
 const mongoose = require("mongoose");
 
 const createEvent = async (req, res) => {
