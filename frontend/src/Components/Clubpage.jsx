@@ -11,6 +11,7 @@ import Overlay from "./Overlay";
 import { Button } from "antd";
 
 function ClubPage() {
+  const { realod, setReload } = useState([]);
   const { clubId } = useParams();
   const navigate = useNavigate();
   const [eventData, setEventData] = useState([]);
@@ -26,16 +27,16 @@ function ClubPage() {
 
   const data = ClubData.find((data_club) => data_club.id === clubId);
 
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/${clubId}`);
+      const events = await response.json();
+      setEventData(events);
+    } catch (err) {
+      console.error("Error fetching events:", err);
+    }
+  };
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/${clubId}`);
-        const events = await response.json();
-        setEventData(events);
-      } catch (err) {
-        console.error("Error fetching events:", err);
-      }
-    };
     fetchEvents();
   }, [clubId]);
 
@@ -47,6 +48,11 @@ function ClubPage() {
       </>
     );
   }
+
+  // Callback function to handle event creation
+  const handleEventCreated = () => {
+    fetchEvents(); // Fetch events again to update the list
+  };
 
   return (
     <div className="page-container">
@@ -60,12 +66,16 @@ function ClubPage() {
           <div style={{ textAlign: "center" }}>
             <Button onClick={toggleOverlay}>Create Event</Button>
             <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
-              <CreateEvent isOpen={isOverlayOpen} onClose={toggleOverlay} />
+              <CreateEvent
+                isOpen={isOverlayOpen}
+                onClose={toggleOverlay}
+                onEventCreated={handleEventCreated}
+              />
             </Overlay>
           </div>
         ) : null}
         <div className="event-card-container">
-         {console.log(eventData)}
+          {console.log(eventData)}
           {eventData.map((event) => (
             <EventCard key={event._id} data={event} />
           ))}

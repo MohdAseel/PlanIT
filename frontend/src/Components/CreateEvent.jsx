@@ -1,24 +1,18 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./components.css";
 import { DatePicker, Input, Form, Upload, Button } from "antd";
 import dayjs from "dayjs";
-import { API } from "../service/api";
-import { DataContext } from "../context/DataProvider";
-import { useNavigate } from "react-router-dom";
-import { PlusOutlined } from "@ant-design/icons";
+import { useParams } from "react-router-dom";
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const today = dayjs();
 const format = "YYYY-MM-DD HH:mm";
 
-function CreateEvent({ onClose }) {
-  const navigate = useNavigate();
+function CreateEvent({ onClose, onEventCreated }) {
+  const { clubId } = useParams();
+
   const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
@@ -27,13 +21,25 @@ function CreateEvent({ onClose }) {
   };
 
   const onFinish = (values) => {
-    console.log(values);
-    axios.post('/:clubId', values)
+    values.bothtime = values.bothtime.map((time) => time.toISOString());
+    values.startdate = values.bothtime[0];
+    values.enddate = values.bothtime[1];
+    delete values.bothtime;
+
+    // "id": "67890",
+    // "title": "Sample Event",
+    // "startdate": "2023-11-01T10:00:00Z",
+    // "enddate": "2023-11-01T12:00:00Z",
+    // "location": "123 Event Street, Event City",
+    // "description": "This is a sample event for testing purposes.",
+    // "image": "http://example.com/sample-event.jpg"
+
+    axios
+      .post(`http://localhost:8000/${clubId}`, values)
       .then((response) => {
-        console.log(response);
         window.alert("Event Created");
         onClose();
-        navigate('/events'); // Navigate to the events page after creating the event
+        onEventCreated();
       })
       .catch((error) => {
         console.error(error);
@@ -68,7 +74,7 @@ function CreateEvent({ onClose }) {
       >
         <Form.Item
           label="Event Title"
-          name="Event Title"
+          name="title"
           rules={[
             {
               required: true,
@@ -81,7 +87,7 @@ function CreateEvent({ onClose }) {
 
         <Form.Item
           label="RangePicker"
-          name="event timedate"
+          name="bothtime"
           rules={[
             {
               required: true,
@@ -100,7 +106,7 @@ function CreateEvent({ onClose }) {
         </Form.Item>
         <Form.Item
           label="Location"
-          name="Location"
+          name="location"
           rules={[
             {
               required: true,
@@ -113,7 +119,7 @@ function CreateEvent({ onClose }) {
 
         <Form.Item
           label="Description"
-          name="Description"
+          name="description"
           rules={[
             {
               required: true,

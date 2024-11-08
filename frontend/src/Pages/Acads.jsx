@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
 import Sidebar from "../Components/Sidebar";
 import MenuBar from "../Components/MenuBar";
 import "./pagestyle/acadstyle.css";
@@ -11,6 +12,13 @@ import { DataContext } from "../context/DataProvider";
 //<--Academics page
 function Acads() {
   const { account } = useContext(DataContext);
+  const [academicEvents, setAcademicEvents] = useState([]);
+
+  const { RangePicker } = DatePicker;
+  const { TextArea } = Input;
+  const today = dayjs();
+  const format = "YYYY-MM-DD HH:mm";
+
   function CardAcads(props) {
     return (
       <div className="card-acads">
@@ -25,13 +33,8 @@ function Acads() {
       </div>
     );
   }
-  //<-- creating and adding a class or assignment
-  const { RangePicker } = DatePicker;
-  const { TextArea } = Input;
-  const today = dayjs();
-  const format = "YYYY-MM-DD HH:mm";
 
-  const onFinish = (e) => {
+  const onFinish = async (e) => {
     e.bothtime = e.bothtime.map((time) => time.toISOString());
     e.startdate = e.bothtime[0];
     e.enddate = e.bothtime[1];
@@ -40,7 +43,16 @@ function Acads() {
     console.log(e);
     window.alert("Event Created");
     toggleOverlay();
+    try {
+      const response = await axios.post("http://localhost:8000/acads", e);
+      window.alert("Event Created");
+      onClose();
+      onEventCreated();
+    } catch (error) {
+      console.error("Error creating academic event:", error);
+    }
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -258,5 +270,4 @@ function Acads() {
     </div>
   );
 }
-
 export default Acads;
