@@ -25,7 +25,7 @@ function EventCardExpanded(props) {
         <div className="event-card-expanded-splitter-right">
           <div className="faq"></div>
           <div className="question-section">
-            <p>Still have doubts? Why not raise a question..</p>
+            <p>Still have doubts? Why not contact us...</p>
           </div>
         </div>
       </div>
