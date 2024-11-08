@@ -1,29 +1,26 @@
 const mongoose = require("mongoose");
 
-const UserSchema = mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  // role: { type: String, enum: ['admin', 'student'], required: true },
-  password: { type: String, required: true },
-  // createdAt: { type: Date, default: Date.now }
-  role: { type: String, default: "student" },
-  classname: { type: String, default: "CSE" },
-  Personal_events: {
-    type: Object,
-    default: {
-      clubId: { type: String, required: true },
-      id: { type: String, required: true },
-      title: { type: String, required: true },
-      date: { type: Date, required: true },
-      time: { type: String },
-      location: { type: String },
-      description: { type: String },
-      image: { type: String },
-    },
-  },
-  Scheduled_events: { type: Array, default: [] },
-  Starred_clubs: { type: Array, default: [] },
+// Define the schema for a single personal event
+const PersonalEventSchema = new mongoose.Schema({
+  id: { type: String, required: true },
+  title: { type: String, required: true },
+  startdate: { type: Date, required: true },
+  enddate: { type: Date, required: true },
+  location: { type: String },
+  description: { type: String },
+  image: { type: String },
 });
 
-const UserModal = mongoose.model("users", UserSchema);
-module.exports = UserModal;
+const UserSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, default: "student" },
+  classname: { type: String, default: "CSE" },
+  personal_events: { type: [PersonalEventSchema], default: [] }, // Changed to array
+  scheduled_events: { type: [String], default: [] },
+  starred_clubs: { type: [String], default: [] },
+});
+
+const User = mongoose.model("Userskksd", UserSchema,"Userskksd");
+module.exports = User;

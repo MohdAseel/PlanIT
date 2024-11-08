@@ -1,5 +1,6 @@
 const eventSchema = require("../models/eventSchema.js");
 const eventClassSchema = require("../models/acadevent.js");
+const User = require("../models/user.js"); // Correctly import User model
 const mongoose = require("mongoose");
 
 const createEvent = async (req, res) => {
@@ -101,6 +102,41 @@ const getEventById = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+const createPersonalEvent = async (req, res) => {
+  try {
+    const { email, title, description, startdate, enddate, location } = req.body;
+
+    // Find the user by email instead of clubId
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    // Generate a unique ID for the personal event
+    const personalEventId = new mongoose.Types.ObjectId().toString();
+
+    const personalEvent = {
+      id: personalEventId,
+      title: title,
+      description: description,
+      startdate: startdate,
+      enddate: enddate,
+      location: location,
+    };
+
+    user.personal_events.push(personalEvent);
+    await user.save();
+
+    res.status(201).json(personalEvent);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
 /*
 // Get all events
 const getAllEvents = async (req, res) => {
@@ -185,4 +221,5 @@ module.exports = {
   createEvent,
   getEventById,
   createClassEvent,
+  createPersonalEvent,
 };
