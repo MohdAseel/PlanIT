@@ -85,55 +85,36 @@ const createClassEvent = async (req, res) => {
   }
 };
 
-// const getEventById = async (req, res) => {
-//   try {
-//     const Event = mongoose.model(
-//       req.params.clubId,
-//       eventSchema,
-//       req.params.clubId
-//     );
-//     const events = await Event.find();
-//     res.json(events);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+const createPersonalEvent = async (req, res) => {
+  try {
+    const { email, title, description, startdate, enddate } = req.body;
+    console.log(req.body);
+    // Find the user by email instead of clubId
+    console.log(email);
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
 
-// const createPersonalEvent = async (req, res) => {
-//   try {
-//     const { email, title, description, startdate, enddate, location } =
-//       req.body;
+    const personalEvent = {
+      title: title,
+      description: description,
+      startdate: startdate,
+      enddate: enddate,
+    };
 
-//     // Find the user by email instead of clubId
-//     const user = await User.findOne({ email: email });
-//     if (!user) {
-//       return res.status(404).json({
-//         message: "User not found",
-//       });
-//     }
+    user.personal_events.push(personalEvent);
+    await user.save();
 
-//     // Generate a unique ID for the personal event
-//     const personalEventId = new mongoose.Types.ObjectId().toString();
-
-//     const personalEvent = {
-//       id: personalEventId,
-//       title: title,
-//       description: description,
-//       startdate: startdate,
-//       enddate: enddate,
-//       location: location,
-//     };
-
-//     user.personal_events.push(personalEvent);
-//     await user.save();
-
-//     res.status(201).json(personalEvent);
-//   } catch (error) {
-//     res.status(500).json({
-//       error: error.message,
-//     });
-//   }
-// };
+    res.status(201).json(personalEvent);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
 
 // Get all events
 const getAllEvents = async (req, res) => {
@@ -214,4 +195,5 @@ module.exports = {
   createEvent,
   createClassEvent,
   getEventByClubId,
+  createPersonalEvent,
 };

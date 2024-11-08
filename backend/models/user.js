@@ -2,13 +2,10 @@ const mongoose = require("mongoose");
 
 // Define the schema for a single personal event
 const PersonalEventSchema = new mongoose.Schema({
-  id: { type: String, required: true },
   title: { type: String, required: true },
   startdate: { type: Date, required: true },
   enddate: { type: Date, required: true },
-  location: { type: String },
   description: { type: String },
-  image: { type: String },
 });
 
 const UserSchema = new mongoose.Schema({

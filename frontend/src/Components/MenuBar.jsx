@@ -103,7 +103,10 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
                 style={{ cursor: "pointer" }}
               />
               <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
-                <CreatePersonalEvent isOpen={isOverlayOpen} onClose={toggleOverlay} />
+                <CreatePersonalEvent
+                  isOpen={isOverlayOpen}
+                  onClose={toggleOverlay}
+                />
               </Overlay>
             </li>
             <li>

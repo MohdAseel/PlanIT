@@ -20,7 +20,7 @@ function CreateEvent({ onClose, onEventCreated }) {
     return e?.fileList;
   };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     values.bothtime = values.bothtime.map((time) => time.toISOString());
     values.startdate = values.bothtime[0];
     values.enddate = values.bothtime[1];
@@ -34,12 +34,12 @@ function CreateEvent({ onClose, onEventCreated }) {
     // "description": "This is a sample event for testing purposes.",
     // "image": "http://example.com/sample-event.jpg"
 
-    axios
+    await axios
       .post(`http://localhost:8000/${clubId}`, values)
       .then((response) => {
-        window.alert("Event Created");
         onClose();
         onEventCreated();
+        window.alert("Event Created");
       })
       .catch((error) => {
         console.error(error);

@@ -1,43 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./components.css";
 import { DatePicker, Input, Form, Button } from "antd";
 import dayjs from "dayjs";
 import { useParams } from "react-router-dom";
+import { DataContext } from "../context/DataProvider";
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const today = dayjs();
 const format = "YYYY-MM-DD HH:mm";
 
-function CreatePersonalEvent({ onClose, onEventCreated }) {
-  const normFile = (e) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
+function CreatePersonalEvent({ onClose }) {
+  const { account } = useContext(DataContext);
 
   const onFinish = async (values) => {
-    try {
-      const { email, title, description, startdate, enddate, location } = values;
+    values.bothtime = values.bothtime.map((time) => time.toISOString());
+    values.startdate = values.bothtime[0];
+    values.enddate = values.bothtime[1];
+    delete values.bothtime;
 
-      const personalEventData = {
-        email, // Include the user's email
-        title,
-        description,
-        startdate,
-        enddate,
-        location,
-      };
+    values.email = account.email;
 
-      await axios.post('http://localhost:8000/personal-events', personalEventData);
-      // Handle success (e.g., close modal, refresh events)
-    } catch (error) {
-      window.alert("Error creating personal event");
-      console.error('Error:', error);
-      // Optionally handle specific error messages
-    }
+    await axios
+      .post("http://localhost:8000/personalevents", values)
+      .then((response) => {
+        onClose();
+        window.alert("Personal Event Created");
+      })
+      .catch((error) => {
+        console.error(error);
+        window.alert("Error creating personal event");
+      });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -73,7 +67,7 @@ function CreatePersonalEvent({ onClose, onEventCreated }) {
           rules={[
             {
               required: true,
-              message: "Enter the Event Title!",
+              message: "Enter the Title!",
             },
           ]}
         >
@@ -98,19 +92,6 @@ function CreatePersonalEvent({ onClose, onEventCreated }) {
             format={format}
             label="Event Date and Time"
           />
-        </Form.Item>
-
-        <Form.Item
-          label="Location"
-          name="location"
-          rules={[
-            {
-              required: true,
-              message: "Enter Location!",
-            },
-          ]}
-        >
-          <Input />
         </Form.Item>
 
         <Form.Item
