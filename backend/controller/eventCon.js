@@ -88,6 +88,20 @@ const createClassEvent = async (req, res) => {
   }
 };
 
+const getEventById = async (req, res) => {
+  try {
+    const Event = mongoose.model(
+      req.params.clubId,
+      eventSchema,
+      req.params.clubId
+    );
+    const events = await Event.find();
+    res.json(events);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+/*
 // Get all events
 const getAllEvents = async (req, res) => {
   try {
@@ -165,8 +179,8 @@ const deleteEvent = async (req, res) => {
     });
   }
 };
-
 */
+
 module.exports = {
   createEvent,
   getAllEvents,
@@ -176,4 +190,3 @@ module.exports = {
   createClassEvent,
   createPersonalEvent,  
 };
-t

@@ -5,7 +5,7 @@ const {
   loginValidation,
 } = require("../Middlewares/AuthValidation.js");
 const {
-  getAllEvents,
+ // getAllEvents,
   getEventById,
   createEvent,
   updateEvent,
@@ -18,18 +18,17 @@ const {
 router.post("/signup", signupValidation, signupUser);
 router.post("/login", loginValidation, loginUser);
 
-router.get("/", getAllEvents);
-router.post("/acads", createClassEvent);
+// router.get("/", getAllEvents);
 
-router.get("/:id", getEventById);
+router.get("/:clubId", getEventById);
 
 // Handle POST request to add events to the database
 router.post("/:clubId", createEvent);
 router.post("/personal-events", createPersonalEvent);
 
-router.put("/:id", updateEvent);
+// router.put("/:id", updateEvent);
 
-router.delete("/:id", deleteEvent);
+// router.delete("/:id", deleteEvent);
 
 module.exports = router;
 
