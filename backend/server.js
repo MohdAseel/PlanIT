@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const ClubModal = require("./models/club.js");
+const EventModal = require("./models/eventSchema.js");
 const Router = require("./routes/route.js");
 require("dotenv").config();
 require("./database/db");
@@ -15,26 +15,31 @@ app.use(cors());
 
 app.use("/", Router);
 
-//this was created to add clubs to spheres
-// app.get("/bullshit", async (req, res) => {
-//   try {
-//     const sampleClub = new ClubModal({
-//       clubId: "TAIC",
-//       clubname: "AI Club",
-//       category: "shashtra",
-//       description: "This is a sample club for demonstration purposes.",
-//       eventId: ["TAIC0001", "TAIC0002"],
-//     });
-//     console.log(sampleClub);
+// Handle POST request to add events to the database
+app.post("/:clubId", async (req, res) => {
+  try {
+    const { clubId, eventId, title, startdate, enddate, location, description, image } = req.body;
 
-//     await sampleClub.save();
-//     res.send("Club saved successfully");
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("Error saving club");
-//   }
-// });
+    const event = new EventModal({
+      clubId,
+      eventId,
+      title,
+      startdate,
+      enddate,
+      location,
+      description,
+      image,
+    });
+
+    await event.save();
+    res.status(200).send("Event saved successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error saving event");
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+

@@ -23,6 +23,7 @@ router.post("/acads", createClassEvent);
 
 router.get("/:id", getEventById);
 
+// Handle POST request to add events to the database
 router.post("/:clubId", createEvent);
 
 router.put("/:id", updateEvent);
@@ -30,3 +31,4 @@ router.put("/:id", updateEvent);
 router.delete("/:id", deleteEvent);
 
 module.exports = router;
+
