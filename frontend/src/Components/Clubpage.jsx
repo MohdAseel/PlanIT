@@ -56,7 +56,7 @@ function ClubPage() {
       <div className="main-content">
         <h1>{data.name}</h1>
         <p>{data.description}</p>
-        {account.role === "Admin" ? (
+        {account.role === "admin" ? (
           <div style={{ textAlign: "center" }}>
             <Button onClick={toggleOverlay}>Create Event</Button>
             <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>

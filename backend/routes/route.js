@@ -21,6 +21,7 @@ router.post("/login", loginValidation, loginUser);
 
 router.get("/:clubId", getEventById);
 
+// Handle POST request to add events to the database
 router.post("/:clubId", createEvent);
 
 // router.put("/:id", updateEvent);
@@ -28,3 +29,4 @@ router.post("/:clubId", createEvent);
 // router.delete("/:id", deleteEvent);
 
 module.exports = router;
+

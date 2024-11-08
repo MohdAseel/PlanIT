@@ -1,7 +1,15 @@
-import React from "react";
+import React, {
+  useEffect,
+  useState
+} from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import "./components.css";
 import { DatePicker, Input, Form, Upload, Button } from "antd";
 import dayjs from "dayjs";
+import { API } from "../service/api";
+import { DataContext } from "../context/DataProvider";
+import { useNavigate } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
 
 const { RangePicker } = DatePicker;
@@ -10,6 +18,7 @@ const today = dayjs();
 const format = "YYYY-MM-DD HH:mm";
 
 function CreateEvent({ onClose }) {
+  const navigate = useNavigate();
   const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
@@ -17,11 +26,21 @@ function CreateEvent({ onClose }) {
     return e?.fileList;
   };
 
-  const onFinish = (e) => {
-    console.log(e);
-    window.alert("Event Created");
-    onClose();
+  const onFinish = (values) => {
+    console.log(values);
+    axios.post('/:clubId', values)
+      .then((response) => {
+        console.log(response);
+        window.alert("Event Created");
+        onClose();
+        navigate('/events'); // Navigate to the events page after creating the event
+      })
+      .catch((error) => {
+        console.error(error);
+        window.alert("Error creating event");
+      });
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed", errorInfo);
   };

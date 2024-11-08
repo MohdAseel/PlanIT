@@ -1,5 +1,7 @@
 const eventSchema = require("../models/eventSchema.js");
+const eventClassSchema = require("../models/acadevent.js");
 const mongoose = require("mongoose");
+
 const createEvent = async (req, res) => {
   try {
     const { title, description, startdate, enddate, location } = req.body;
@@ -33,7 +35,7 @@ const createEvent = async (req, res) => {
     const clubdata = await EventCollection.findOne({
       clubId: req.params.clubId,
     });
-    console.log(clubdata);
+
     const lengthe = clubdata.eventId.length + 1;
     const newId = clubdata.clubId + lengthe.toString().padStart(4, "0");
 
@@ -41,6 +43,40 @@ const createEvent = async (req, res) => {
 
     await event.save();
     res.status(201).json(event);
+    await EventCollection.updateOne(
+      { clubId: req.params.clubId },
+      { $push: { eventId: newId } }
+    );
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+const createClassEvent = async (req, res) => {
+  try {
+    const {
+      classname,
+      courseno,
+      class_assignment,
+      description,
+      startdate,
+      enddate,
+      location,
+    } = req.body;
+    const EventClass = mongoose.model(classname, eventClassSchema, classname); // force the model to use the clubId as the collection name
+    const eventclass = new EventClass({
+      courseno: courseno,
+      class_assignment: class_assignment,
+      startdate: startdate,
+      enddate: enddate,
+      description: description,
+      location: location,
+    });
+
+    await eventclass.save();
+    res.status(201).json(eventclass);
     await EventCollection.updateOne(
       { clubId: req.params.clubId },
       { $push: { eventId: newId } }
