@@ -12,6 +12,8 @@ const {
   //deleteEvent,
 } = require("../controller/eventCon.js");
 
+const { getEventIdsByEmail} = require("../controller/scheduled_events_con");// Import controller
+
 const router = express.Router();
 
 router.post("/signup", signupValidation, signupUser);
@@ -27,6 +29,8 @@ router.post("/:clubId", createEvent);
 // router.put("/:id", updateEvent);
 
 // router.delete("/:id", deleteEvent);
+
+router.get("/api/getEventIdsByEmail", getEventIdsByEmail);
 
 module.exports = router;
 
