@@ -37,14 +37,11 @@ function ClubPage() {
       console.error("Error fetching events:", err);
     }
   };
-  useEffect(() => {
-    fetchEvents();
-  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchEvents();
-    }, 5000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -83,8 +80,6 @@ function ClubPage() {
           </div>
         ) : null}
         <div className="event-card-container">
-          {console.log(typeof eventData)}
-          {console.log(eventData)}
           {eventData.map((event) => (
             <EventCard key={event._id} data={event} />
           ))}
