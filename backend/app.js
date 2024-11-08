@@ -1,4 +1,4 @@
-const express = require("express");
+/*const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Event = require("./models/events");
@@ -34,3 +34,4 @@ app.get("/:clubId", async (req, res) => {
 app.listen(5000, () => {
   console.log("Server is running on http://localhost:5000");
 });
+*/

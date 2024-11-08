@@ -9,7 +9,6 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import "./App.css";
 import LoginPage from "./Pages/LoginPage.jsx";
 import Sports from "./Pages/Sports.jsx";
 import Technical from "./Pages/Technical.jsx";
@@ -22,95 +21,44 @@ import MonthView from "./Pages/MonthView.jsx";
 import ClubPage from "./Components/Clubpage.jsx";
 import Pagedata from "./Pages/pagedata/PageData.jsx";
 import DataProvider from "./context/DataProvider.jsx";
+const PrivateRoute = ({ isUserAuthenticated, ...props }) => {
+  return isUserAuthenticated ? (
+    <>
+      <Outlet />
+    </>
+  ) : (
+    <Navigate replace to="/login" />
+  );
+};
 
-export default function App() {
-  const [isAuthenticated, isUserAuthenticated] = useState(false);
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const PrivateRoute = ({ isUserAuthenticated, ...props }) => {
-    return isAuthenticated ? (
-      <>
-        <Outlet />
-      </>
-    ) : (
-      <Navigate replace to="/login" />
-    );
-  };
+  useEffect(() => {
+    // Logic to check if user is authenticated
+    setIsAuthenticated(true); // Example: set to true for now
+  }, []);
 
   return (
     <DataProvider>
-      {/* <Router>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/dayview" element={<DayView />} />
-          <Route path="/weekview" element={<WeekView />} />
-          <Route path="/sports" element={<Sports />} />
-          <Route path="/technical" element={<Technical />} />
-          <Route path="/acads" element={<Acads />} />
-          <Route path="/cultural" element={<Cultural />} />
-          <Route path="/monthview" element={<MonthView />} />
-
-          <Route path="/:clubId" element={<ClubPage />} />
-          <Route path="*" element={<ERROR404 />} />
-        </Routes>
-      </Router> */}
       <Router>
         <Routes>
           <Route
             path="/login"
-            element={<LoginPage isUserAuthenticated={isUserAuthenticated} />}
-          ></Route>
+            element={<LoginPage isUserAuthenticated={isAuthenticated} />}
+          />
           <Route
             path="/"
-            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
+            element={<PrivateRoute isUserAuthenticated={isAuthenticated} />}
           >
             <Route path="/dayview" element={<DayView />} />
-          </Route>
-          <Route
-            path="/"
-            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
-          >
             <Route path="/weekview" element={<WeekView />} />
-          </Route>
-          <Route
-            path="/"
-            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
-          >
             <Route path="/sports" element={<Sports />} />
-          </Route>
-          <Route
-            path="/"
-            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
-          >
             <Route path="/technical" element={<Technical />} />
-          </Route>
-          <Route
-            path="/"
-            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
-          >
             <Route path="/acads" element={<Acads />} />
-          </Route>
-          <Route
-            path="/"
-            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
-          >
             <Route path="/cultural" element={<Cultural />} />
-          </Route>
-          <Route
-            path="/"
-            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
-          >
             <Route path="/monthview" element={<MonthView />} />
-          </Route>
-          <Route
-            path="/"
-            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
-          >
             <Route path="/:clubId" element={<ClubPage />} />
-          </Route>
-          <Route
-            path="/"
-            element={<PrivateRoute isAuthenticated={isAuthenticated} />}
-          >
             <Route path="/*" element={<ERROR404 />} />
           </Route>
         </Routes>
@@ -118,3 +66,5 @@ export default function App() {
     </DataProvider>
   );
 }
+
+export default App;
