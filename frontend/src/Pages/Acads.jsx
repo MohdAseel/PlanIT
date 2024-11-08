@@ -40,16 +40,13 @@ function Acads() {
     e.enddate = e.bothtime[1];
     e.classname = account.classname;
     delete e.bothtime;
-    console.log(e);
-    window.alert("Event Created");
-    toggleOverlay();
     try {
       const response = await axios.post("http://localhost:8000/acads", e);
+      toggleOverlay();
       window.alert("Event Created");
-      onClose();
-      onEventCreated();
     } catch (error) {
       console.error("Error creating academic event:", error);
+      window.alert("Error creating event");
     }
   };
 

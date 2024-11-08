@@ -31,16 +31,20 @@ function ClubPage() {
     try {
       const response = await fetch(`http://localhost:8000/${clubId}`);
       const events = await response.json();
+      console.log(events);
       setEventData(events);
     } catch (err) {
       console.error("Error fetching events:", err);
     }
   };
+  useEffect(() => {
+    fetchEvents();
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchEvents();
-    }, 2000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -79,6 +83,7 @@ function ClubPage() {
           </div>
         ) : null}
         <div className="event-card-container">
+          {console.log(typeof eventData)}
           {console.log(eventData)}
           {eventData.map((event) => (
             <EventCard key={event._id} data={event} />

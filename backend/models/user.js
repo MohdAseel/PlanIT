@@ -22,5 +22,5 @@ const UserSchema = new mongoose.Schema({
   starred_clubs: { type: [String], default: [] },
 });
 
-const User = mongoose.model("Userskksd", UserSchema,"Userskksd");
+const User = mongoose.model("User", UserSchema, "User");
 module.exports = User;

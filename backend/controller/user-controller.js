@@ -1,4 +1,4 @@
-const UserModal = require("../models/user"); // Import the User model
+const UserModal = require("../models/User"); // Import the User model
 const bcrypt = require("bcrypt"); // Import bcrypt for password hashing
 const jwt = require("jsonwebtoken"); // Import jsonwebtoken for creating tokens
 const dotenv = require("dotenv"); // Import dotenv for environment variables

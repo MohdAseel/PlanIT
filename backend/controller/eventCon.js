@@ -1,6 +1,6 @@
 const eventSchema = require("../models/eventSchema.js");
 const eventClassSchema = require("../models/acadevent.js");
-const User = require("../models/user.js"); // Correctly import User model
+const User = require("../models/User.js"); // Correctly import User model
 const mongoose = require("mongoose");
 
 const createEvent = async (req, res) => {
@@ -75,7 +75,7 @@ const createClassEvent = async (req, res) => {
       description: description,
       location: location,
     });
-
+    console.log(eventclass);
     await eventclass.save();
     res.status(201).json(eventclass);
   } catch (error) {
@@ -85,55 +85,56 @@ const createClassEvent = async (req, res) => {
   }
 };
 
-const getEventById = async (req, res) => {
-  try {
-    const Event = mongoose.model(
-      req.params.clubId,
-      eventSchema,
-      req.params.clubId
-    );
-    const events = await Event.find();
-    res.json(events);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+// const getEventById = async (req, res) => {
+//   try {
+//     const Event = mongoose.model(
+//       req.params.clubId,
+//       eventSchema,
+//       req.params.clubId
+//     );
+//     const events = await Event.find();
+//     res.json(events);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
 
-const createPersonalEvent = async (req, res) => {
-  try {
-    const { email, title, description, startdate, enddate, location } = req.body;
+// const createPersonalEvent = async (req, res) => {
+//   try {
+//     const { email, title, description, startdate, enddate, location } =
+//       req.body;
 
-    // Find the user by email instead of clubId
-    const user = await User.findOne({ email: email });
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found",
-      });
-    }
+//     // Find the user by email instead of clubId
+//     const user = await User.findOne({ email: email });
+//     if (!user) {
+//       return res.status(404).json({
+//         message: "User not found",
+//       });
+//     }
 
-    // Generate a unique ID for the personal event
-    const personalEventId = new mongoose.Types.ObjectId().toString();
+//     // Generate a unique ID for the personal event
+//     const personalEventId = new mongoose.Types.ObjectId().toString();
 
-    const personalEvent = {
-      id: personalEventId,
-      title: title,
-      description: description,
-      startdate: startdate,
-      enddate: enddate,
-      location: location,
-    };
+//     const personalEvent = {
+//       id: personalEventId,
+//       title: title,
+//       description: description,
+//       startdate: startdate,
+//       enddate: enddate,
+//       location: location,
+//     };
 
-    user.personal_events.push(personalEvent);
-    await user.save();
+//     user.personal_events.push(personalEvent);
+//     await user.save();
 
-    res.status(201).json(personalEvent);
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
-  }
-};
-/*
+//     res.status(201).json(personalEvent);
+//   } catch (error) {
+//     res.status(500).json({
+//       error: error.message,
+//     });
+//   }
+// };
+
 // Get all events
 const getAllEvents = async (req, res) => {
   try {
@@ -145,22 +146,19 @@ const getAllEvents = async (req, res) => {
     });
   }
 };
-/*
+
 // Get a single event by ID
-const getEventById = async (req, res) => {
+const getEventByClubId = async (req, res) => {
   try {
-    const { id } = req.params;
-    const event = await Event.findById(id);
-    if (!event) {
-      return res.status(404).json({
-        message: "Event not found",
-      });
-    }
-    res.json(event);
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    const Event = mongoose.model(
+      req.params.clubId,
+      eventSchema,
+      req.params.clubId
+    );
+    const events = await Event.find();
+    res.json(events);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -207,15 +205,13 @@ const deleteEvent = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      error: error.message,
+      // error: error.message,
     });
   }
 };
-*/
 
 module.exports = {
   createEvent,
-  getEventById,
   createClassEvent,
-  createPersonalEvent,
+  getEventByClubId,
 };
