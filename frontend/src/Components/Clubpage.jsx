@@ -38,7 +38,7 @@ function ClubPage() {
   };
   useEffect(() => {
     fetchEvents();
-  }, [clubId]);
+  });
 
   if (!data) {
     return (

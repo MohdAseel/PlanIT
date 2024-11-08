@@ -9,11 +9,11 @@ const {
  // getAllEvents,
   getEventById,
   createEvent,
-  createClassEvent,
+ // createClassEvent,
 } = require("../controller/eventCon.js");
 
-// const { getEventIdsByEmail} = require("../controller/scheduled_events_con");// Import controller
-
+const { getEventIdsByEmail} = require("../controller/user-controller.js");// Import controller
+const { getEventDetailsByIds} = require("../controller/scheduled_events_con");
 
 router.post("/signup", signupValidation, signupUser);
 router.post("/login", loginValidation, loginUser);
@@ -29,7 +29,8 @@ router.post("/:clubId", createEvent);
 
 // router.delete("/:id", deleteEvent);
 
-// router.get("/api/getEventIdsByEmail", getEventIdsByEmail);
+router.get("/api/getEventIdsByEmail", getEventIdsByEmail);
+router.get("/api/getEventDetailsByIds", getEventDetailsByIds);
 
 module.exports = router;
 
