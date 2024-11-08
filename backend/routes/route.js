@@ -11,27 +11,21 @@ const {
   createClassEvent,
   getEventByClubId,
   createPersonalEvent,
+  addEvent,
 } = require("../controller/eventCon.js");
-
-// const { getEventIdsByEmail} = require("../controller/scheduled_events_con");// Import controller
-
-// const { getEventIdsByEmail } = require("../controller/user-controller.js"); // Import controller
-// const { getEventDetailsByIds } = require("../controller/scheduled_events_con");
-
+// User routes
 router.post("/signup", signupValidation, signupUser);
 router.post("/login", loginValidation, loginUser);
+
+// Event routes
 router.post("/personalevents", createPersonalEvent);
 router.post("/acads", createClassEvent);
+router.post("/user/addEvent", addEvent); // Add route for adding an event to a user
 
-// router.get("/", getAllEvents);
-
+// Event retrieval routes
 router.get("/:clubId", getEventByClubId);
 
 // Handle POST request to add events to the database
 router.post("/:clubId", createEvent);
-
-// router.put("/:id", updateEvent);
-
-// router.delete("/:id", deleteEvent);
 
 module.exports = router;

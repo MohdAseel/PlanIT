@@ -17,7 +17,7 @@ function EventCard(props) {
 
   const addEvent = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/api/user/addEvent", {
+      const response = await axios.post("http://localhost:8000/user/addEvent", {
         email: account.email,
         eventId: data.eventId,
       });

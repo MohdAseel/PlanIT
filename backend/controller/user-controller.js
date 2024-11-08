@@ -51,14 +51,16 @@ const loginUser = async (request, response) => {
     const newToken = new Token({ token: refreshToken });
     await newToken.save();
 
-    response.status(200).json({
-      accessToken,
-      refreshToken,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      classname: user.classname,
-    });
+    response
+      .status(200)
+      .json({
+        accessToken,
+        refreshToken,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        class: user.class,
+      });
   } catch (error) {
     response.status(500).json({
       message: "An error occurred while logining the user",

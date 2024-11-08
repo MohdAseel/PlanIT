@@ -191,9 +191,35 @@ const deleteEvent = async (req, res) => {
   }
 };
 
+const addEvent = async (req, res) => {
+  try {
+    const { email, eventId } = req.body;  // Assuming these are the fields sent in the request body
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.scheduled_events.includes(eventId)) {
+      return res.status(400).json({ message: "Event already scheduled" });
+    }
+
+    user.scheduled_events.push(eventId);  // Add eventId to scheduled_events
+    await user.save();
+
+    res.status(201).json({
+      message: "Event added to scheduled events",
+      user: user,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
 module.exports = {
   createEvent,
   createClassEvent,
   getEventByClubId,
   createPersonalEvent,
+  addEvent,
 };
