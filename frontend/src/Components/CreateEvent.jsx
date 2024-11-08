@@ -10,7 +10,7 @@ const { TextArea } = Input;
 const today = dayjs();
 const format = "YYYY-MM-DD HH:mm";
 
-function CreateEvent({ onClose }) {
+function CreateEvent({ onClose, onEventCreated }) {
   const { clubId } = useParams();
 
   const normFile = (e) => {
@@ -34,13 +34,12 @@ function CreateEvent({ onClose }) {
     // "description": "This is a sample event for testing purposes.",
     // "image": "http://example.com/sample-event.jpg"
 
-    console.log(values);
     axios
       .post(`http://localhost:8000/${clubId}`, values)
       .then((response) => {
-        console.log(response);
         window.alert("Event Created");
         onClose();
+        onEventCreated();
       })
       .catch((error) => {
         console.error(error);
