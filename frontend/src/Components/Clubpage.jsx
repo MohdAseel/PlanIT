@@ -38,11 +38,16 @@ function ClubPage() {
   };
 
   useEffect(() => {
+<<<<<<< HEAD
+    fetchEvents();
+  });
+=======
     const timer = setTimeout(() => {
       fetchEvents();
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
+>>>>>>> 6c9dff301c864eb2f8f3f7ee2f2b3ad3b4b7ef5b
 
   if (!data) {
     return (
