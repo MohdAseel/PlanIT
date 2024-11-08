@@ -218,7 +218,7 @@ const Login = ({ isUserAuthenticated }) => {
         name: response.data.name,
         email: response.data.email,
         role: response.data.role,
-        class: response.data.class,
+        classname: response.data.classname,
       });
 
       isUserAuthenticated(true);
@@ -250,8 +250,7 @@ const Login = ({ isUserAuthenticated }) => {
         <Image src={imageURL} alt="blog" />
         {account === "login" ? (
           <Wrapper>
-            
-              <TextField
+            <TextField
               variant="standard"
               value={login.email}
               onChange={(e) => onValueChange(e)}
