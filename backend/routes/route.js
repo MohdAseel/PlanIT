@@ -1,4 +1,5 @@
 const express = require("express");
+const router = express.Router();
 const { signupUser, loginUser } = require("../controller/user-controller.js");
 const {
   signupValidation,
@@ -8,10 +9,7 @@ const {
  // getAllEvents,
   getEventById,
   createEvent,
-  updateEvent,
-  deleteEvent,
   createClassEvent,
-  createPersonalEvent,
 } = require("../controller/eventCon.js");
 
 
@@ -24,7 +22,6 @@ router.get("/:clubId", getEventById);
 
 // Handle POST request to add events to the database
 router.post("/:clubId", createEvent);
-router.post("/personal-events", createPersonalEvent);
 
 // router.put("/:id", updateEvent);
 

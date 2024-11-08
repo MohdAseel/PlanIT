@@ -183,10 +183,6 @@ const deleteEvent = async (req, res) => {
 
 module.exports = {
   createEvent,
-  getAllEvents,
   getEventById,
-  updateEvent,
-  deleteEvent,
   createClassEvent,
-  createPersonalEvent,  
 };
