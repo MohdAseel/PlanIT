@@ -15,52 +15,6 @@ app.use(cors());
 
 app.use("/", Router);
 
-// Handle POST request to add events to the database
-// app.post("/:clubId", async (req, res) => {
-//   try {
-//     const { clubId, eventId, title, startdate, enddate, location, description, image } = req.body;
-
-//     const event = new EventModal({
-//       clubId,
-//       eventId,
-//       title,
-//       startdate,
-//       enddate,
-//       location,
-//       description,
-//       image,
-//     });
-
-//     await event.save();
-//     res.status(200).send("Event saved successfully");
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("Error saving event");
-//   }
-// });
-
-// // Handle POST request to add academic events to the database
-// app.post("/acads", async (req, res) => {
-//   try {
-//     const { courseno, class_assignment, startdate, enddate, location, description } = req.body;
-
-//     const event = new AcademicEventModal({
-//       courseno,
-//       class_assignment,
-//       startdate,
-//       enddate,
-//       location,
-//       description,
-//     });
-
-//     await event.save();
-//     res.status(200).send("Academic event saved successfully");
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("Error saving academic event");
-//   }
-// });
-
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
