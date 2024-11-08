@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Overlay from "./Overlay";
-import CreateEvent from "./CreateEvent";
+import CreatePersonalEvent from "./CreatePersonalEvent";
 import CheckboxMenu from "./CheckBoxMenu";
 import { Input } from "antd";
 
@@ -103,7 +103,7 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
                 style={{ cursor: "pointer" }}
               />
               <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
-                <CreateEvent isOpen={isOverlayOpen} onClose={toggleOverlay} />
+                <CreatePersonalEvent isOpen={isOverlayOpen} onClose={toggleOverlay} />
               </Overlay>
             </li>
             <li>
