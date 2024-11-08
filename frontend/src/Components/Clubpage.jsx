@@ -27,16 +27,16 @@ function ClubPage() {
 
   const data = ClubData.find((data_club) => data_club.id === clubId);
 
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/${clubId}`);
+      const events = await response.json();
+      setEventData(events);
+    } catch (err) {
+      console.error("Error fetching events:", err);
+    }
+  };
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/${clubId}`);
-        const events = await response.json();
-        setEventData(events);
-      } catch (err) {
-        console.error("Error fetching events:", err);
-      }
-    };
     fetchEvents();
   }, [clubId]);
 
