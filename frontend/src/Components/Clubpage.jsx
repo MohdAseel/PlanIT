@@ -36,9 +36,13 @@ function ClubPage() {
       console.error("Error fetching events:", err);
     }
   };
+
   useEffect(() => {
-    fetchEvents();
-  });
+    const timer = setTimeout(() => {
+      fetchEvents();
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!data) {
     return (
