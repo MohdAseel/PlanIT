@@ -99,7 +99,7 @@ const getAllEvents = async (req, res) => {
     });
   }
 };
-
+/*
 // Get a single event by ID
 const getEventById = async (req, res) => {
   try {
@@ -166,6 +166,7 @@ const deleteEvent = async (req, res) => {
   }
 };
 
+*/
 module.exports = {
   createEvent,
   getAllEvents,
@@ -173,4 +174,6 @@ module.exports = {
   updateEvent,
   deleteEvent,
   createClassEvent,
+  createPersonalEvent,  
 };
+t

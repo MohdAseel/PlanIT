@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
 import Sidebar from "../Components/Sidebar";
 import MenuBar from "../Components/MenuBar";
 import "./pagestyle/acadstyle.css";
@@ -11,40 +12,39 @@ import { DataContext } from "../context/DataProvider";
 //<--Academics page
 function Acads() {
   const { account } = useContext(DataContext);
-  function CardAcads(props) {
-    return (
-      <div className="card-acads">
-        <div className="card-acad-title">
-          <h2>{props.courseno}</h2>
-          <h2>{props.time}</h2>
-        </div>
+  const [academicEvents, setAcademicEvents] = useState([]);
 
-        <h2 style={{ textAlign: "right" }}>{props.date}</h2>
-        <h2>{props.location}</h2>
-        <p>{props.desc}</p>
-      </div>
-    );
-  }
-  //<-- creating and adding a class or assignment
-  const { RangePicker } = DatePicker;
-  const { TextArea } = Input;
-  const today = dayjs();
-  const format = "YYYY-MM-DD HH:mm";
+  useEffect(() => {
+    // Fetch academic events from the backend
+    const fetchAcademicEvents = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/acads");
+        setAcademicEvents(response.data);
+      } catch (error) {
+        console.error("Error fetching academic events:", error);
+      }
+    };
 
-  const onFinish = (e) => {
-    e.bothtime = e.bothtime.map((time) => time.toISOString());
-    e.startdate = e.bothtime[0];
-    e.enddate = e.bothtime[1];
-    e.classname = account.classname;
-    delete e.bothtime;
-    console.log(e);
-    window.alert("Event Created");
-    toggleOverlay();
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+    fetchAcademicEvents();
+  }, []);
+
   function AddClassAssignment() {
+    const [form] = Form.useForm();
+
+    const onFinish = async (values) => {
+      try {
+        const response = await axios.post("/acads", values);
+        // Handle the response from the server to update the frontend
+        console.log("Academic event created successfully:", response.data);
+        form.resetFields();
+      } catch (error) {
+        console.error("Error creating academic event:", error);
+      }
+    };
+
+    const onFinishFailed = (errorInfo) => {
+      console.log("Failed:", errorInfo);
+    };
     return (
       <div className="create-event-container">
         <h2>Schedule</h2>
@@ -258,5 +258,4 @@ function Acads() {
     </div>
   );
 }
-
 export default Acads;

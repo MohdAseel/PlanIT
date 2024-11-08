@@ -11,9 +11,9 @@ const {
   updateEvent,
   deleteEvent,
   createClassEvent,
+  createPersonalEvent,
 } = require("../controller/eventCon.js");
 
-const router = express.Router();
 
 router.post("/signup", signupValidation, signupUser);
 router.post("/login", loginValidation, loginUser);
@@ -25,6 +25,7 @@ router.get("/:id", getEventById);
 
 // Handle POST request to add events to the database
 router.post("/:clubId", createEvent);
+router.post("/personal-events", createPersonalEvent);
 
 router.put("/:id", updateEvent);
 

@@ -39,6 +39,28 @@ app.post("/:clubId", async (req, res) => {
   }
 });
 
+// Handle POST request to add academic events to the database
+app.post("/acads", async (req, res) => {
+  try {
+    const { courseno, class_assignment, startdate, enddate, location, description } = req.body;
+
+    const event = new AcademicEventModal({
+      courseno,
+      class_assignment,
+      startdate,
+      enddate,
+      location,
+      description,
+    });
+
+    await event.save();
+    res.status(200).send("Academic event saved successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error saving academic event");
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
