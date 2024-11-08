@@ -29,8 +29,7 @@ function ClubPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/${clubId}`);
-        console.log(response);
+        const response = await fetch(`http://localhost:8000/${clubId}`);
         const events = await response.json();
         setEventData(events);
       } catch (err) {
@@ -66,6 +65,7 @@ function ClubPage() {
           </div>
         ) : null}
         <div className="event-card-container">
+         {console.log(eventData)}
           {eventData.map((event) => (
             <EventCard key={event._id} data={event} />
           ))}
