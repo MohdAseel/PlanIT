@@ -2,6 +2,7 @@ const eventSchema = require("../models/eventSchema.js");
 const eventClassSchema = require("../models/acadevent.js");
 const User = require("../models/user.js"); // Correctly import User model
 const mongoose = require("mongoose");
+const EventClass = mongoose.model("CSE", eventClassSchema, "CSE");
 
 const createEvent = async (req, res) => {
   try {
@@ -129,65 +130,6 @@ const getEventByClubId = async (req, res) => {
     res.json(events);
   } catch (err) {
     res.status(500).json({ message: err.message });
-  }
-};
-
-const getAllEvents = async (req, res) => {
-  try {
-    const events = await Event.find();
-    res.json(events);
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
-  }
-};
-
-// Update an event by ID
-const updateEvent = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { title, description, date, location } = req.body;
-    const event = await Event.findByIdAndUpdate(
-      id,
-      {
-        title,
-        description,
-        date,
-        location,
-      },
-      { new: true }
-    );
-    if (!event) {
-      return res.status(404).json({
-        message: "Event not found",
-      });
-    }
-    res.json(event);
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
-  }
-};
-
-// Delete an event by ID
-const deleteEvent = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const event = await Event.findByIdAndDelete(id);
-    if (!event) {
-      return res.status(404).json({
-        message: "Event not found",
-      });
-    }
-    res.json({
-      message: "Event deleted successfully",
-    });
-  } catch (error) {
-    res.status(500).json({
-      // error: error.message,
-    });
   }
 };
 
@@ -413,6 +355,19 @@ const getEventById = async (req, res) => {
   }
 };
 
+const getAcademicEvents = async (req, res) => {
+  try {
+    // Fetch all events from the EventClass collection
+    const events = await EventClass.find();
+
+    // Send the separated events as a response
+    res.status(200).json(events);
+  } catch (error) {
+    console.error("Error fetching academic events:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 module.exports = {
   createEvent,
   createClassEvent,
@@ -425,4 +380,5 @@ module.exports = {
   getStarredClubs,
   getLatestEvents,
   getEventById,
+  getAcademicEvents,
 };
