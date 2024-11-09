@@ -29,6 +29,8 @@ router.post("/login", loginValidation, loginUser);
 router.post("/personalevents", createPersonalEvent);
 router.post("/acads", createClassEvent);
 router.get("/acads", getAcademicEvents);
+router.get("/api/getEventIds", getEventIdsByEmail);
+router.post("/api/getEventDetails", getEventDetailsByIds);
 
 // router.get("/", getAllEvents);
 
