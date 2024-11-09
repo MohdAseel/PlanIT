@@ -6,5 +6,10 @@ const ClubData = [
     name: "AI Club",
     description: "This is the AI club of IIT Madras",
   },
+  {
+    id:"CIFC",
+    name:"Informals Club",
+    description:"This is the Informals Club of IIT Madras",
+  }
 ];
 export default ClubData;

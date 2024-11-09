@@ -9,29 +9,30 @@ import { DataContext } from "../context/DataProvider";
 import CreateEvent from "./CreateEvent";
 import Overlay from "./Overlay";
 import { Button } from "antd";
+import Star from "./Star";  // Import the Star component
 
 function ClubPage() {
-  const { realod, setReload } = useState([]);
+  const { reload, setReload } = useState([]);
   const { clubId } = useParams();
   const navigate = useNavigate();
   const [eventData, setEventData] = useState([]);
-  //for overlay of create event
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
+  // Toggle overlay state for Create Event
   const toggleOverlay = () => {
     setIsOverlayOpen(!isOverlayOpen);
   };
 
-  const { account } = useContext(DataContext);
-  ///here account.role is the role of the user
+  const { account } = useContext(DataContext); // Get account info from context
 
+  // Find the current club data based on clubId
   const data = ClubData.find((data_club) => data_club.id === clubId);
 
+  // Fetch the events for this specific club
   const fetchEvents = async () => {
     try {
       const response = await fetch(`http://localhost:8000/${clubId}`);
       const events = await response.json();
-      console.log(events);
       setEventData(events);
     } catch (err) {
       console.error("Error fetching events:", err);
@@ -54,9 +55,8 @@ function ClubPage() {
     );
   }
 
-  // Callback function to handle event creation
   const handleEventCreated = () => {
-    fetchEvents(); // Fetch events again to update the list
+    fetchEvents(); // Fetch events again after an event is created
   };
 
   return (
@@ -67,18 +67,27 @@ function ClubPage() {
       <div className="main-content">
         <h1>{data.name}</h1>
         <p>{data.description}</p>
-        {account.role === "admin" ? (
-          <div style={{ textAlign: "center" }}>
-            <Button onClick={toggleOverlay}>Create Event</Button>
-            <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
-              <CreateEvent
-                isOpen={isOverlayOpen}
-                onClose={toggleOverlay}
-                onEventCreated={handleEventCreated}
-              />
-            </Overlay>
-          </div>
-        ) : null}
+
+        {/* Show buttons depending on user role */}
+        <div style={{ textAlign: "center", display: "flex", justifyContent: "space-between" }}>
+          {/* Only show Create Event button if the user is an admin */}
+          {account.role === "admin" ? (
+            <>
+              <Button onClick={toggleOverlay}>Create Event</Button>
+              <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
+                <CreateEvent
+                  isOpen={isOverlayOpen}
+                  onClose={toggleOverlay}
+                  onEventCreated={handleEventCreated}
+                />
+              </Overlay>
+            </>
+          ) : null}
+
+          {/* Both admins and students can see the Star Club button */}
+          <Star clubId={clubId} />
+        </div>
+
         <div className="event-card-container">
           {eventData.map((event) => (
             <EventCard key={event._id} data={event} />

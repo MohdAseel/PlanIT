@@ -22,9 +22,9 @@ const createEvent = async (req, res) => {
     let sphere = req.params.clubId.charAt(0);
     if (sphere === "T") {
       sphere = "technical";
-    } else if (sphere === "c") {
+    } else if (sphere === "C") {
       sphere = "cultural";
-    } else if (sphere === "s") {
+    } else if (sphere === "S") {
       sphere = "sports";
     } else {
       return res.status(400).json({
@@ -215,6 +215,124 @@ const addEvent = async (req, res) => {
   }
 };
 
+const starClub = async(req, res) => {
+  const { clubId, email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const alreadyStarred = user.starred_clubs.includes(clubId);
+    if (alreadyStarred) {
+      user.starred_clubs = user.starred_clubs.filter((id) => id !== clubId);
+    } else {
+      user.starred_clubs.push(clubId);
+    }
+
+    await user.save();
+    res.json({ success: true, starred: !alreadyStarred });
+  } catch (error) {
+    console.error("Error starring club:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+const getStarredClubs = async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    console.log(`Fetching starred clubs for email: ${email}`);
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: "Email parameter is missing." });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found." });
+    }
+
+    if (!Array.isArray(user.starred_clubs)) {
+      return res.status(500).json({ success: false, message: "'starred_clubs' is not an array." });
+    }
+
+    // Return the array of clubId strings directly
+    res.status(200).json({ success: true, starred_clubs: user.starred_clubs });
+  } catch (error) {
+    console.error("Error fetching starred clubs:", error);
+    res.status(500).json({ success: false, message: "Server error." });
+  }
+};
+
+const getLatestEvents = async (req, res) => {
+  console.log("getLatestEvents controller invoked");
+  try {
+    const currentDate = new Date();
+    const clubIds = ['TAIC', 'CIFC']; // Array of clubIds
+
+    // Fetch events from each club's collection
+    const eventPromises = clubIds.map(async (clubId) => {
+      const collection = mongoose.connection.collection(clubId);
+      const events = await collection
+        .find({ startdate: { $gte: currentDate } }) // Filter future events
+        .sort({ startdate: 1 }) // Sort by startdate ascending
+        .limit(10) // Optional: Limit per club to optimize performance
+        .toArray();
+      console.log(`Fetched events from ${clubId}:`, events);
+      return events;
+    });
+
+    // Wait for all event fetch operations to complete
+    const eventsArrays = await Promise.all(eventPromises);
+
+    // Combine all events into a single array
+    const allEvents = eventsArrays.flat();
+    console.log("All events before sorting:", allEvents);
+
+    // Sort all events by startdate ascending
+    allEvents.sort((a, b) => new Date(a.startdate) - new Date(b.startdate));
+    console.log("All events after sorting:", allEvents);
+
+    // Select the top 3 upcoming events
+    const latestEvents = allEvents.slice(0, 3);
+    console.log("Latest Events:", latestEvents);
+
+    res.status(200).json({ events: latestEvents });
+  } catch (error) {
+    console.error("Error fetching latest events:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const getEventById = async (req, res) => {
+  const { eventId } = req.params;
+  const clubIds = ['TAIC', 'CIFC']; // Add more clubIds as needed
+
+  try {
+    let foundEvent = null;
+
+    for (const clubId of clubIds) {
+      const collection = mongoose.connection.collection(clubId);
+      const event = await collection.findOne({ eventId: eventId });
+      if (event) {
+        foundEvent = event;
+        break;
+      }
+    }
+
+    if (foundEvent) {
+      res.status(200).json({ event: foundEvent });
+    } else {
+      res.status(404).json({ message: "Event not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching event by ID:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 module.exports = {
   createEvent,
@@ -222,4 +340,8 @@ module.exports = {
   getEventByClubId,
   createPersonalEvent,
   addEvent,
+  starClub,
+  getStarredClubs,
+  getLatestEvents, // Ensure this is exported
+  getEventById, // Export the new controller
 };

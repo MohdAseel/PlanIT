@@ -9,6 +9,7 @@ import {
 import { UserProvider } from "./UserContext"; // Import UserProvider
 import DataProvider from "./context/DataProvider.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
+import EventDetail from "./Pages/EventDetail.jsx";
 import Sports from "./Pages/Sports.jsx";
 import Technical from "./Pages/Technical.jsx";
 import Cultural from "./Pages/Cultural.jsx";
@@ -49,6 +50,7 @@ export default function App() {
               }
             >
               <Route path="/dayview" element={<DayView />} />
+              <Route path="/event/:eventId" element={<EventDetail />} />
               <Route path="/weekview" element={<WeekView />} />
               <Route path="/sports" element={<Sports />} />
               <Route path="/technical" element={<Technical />} />
