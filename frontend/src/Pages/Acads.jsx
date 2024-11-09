@@ -9,30 +9,34 @@ import dayjs from "dayjs";
 import Overlay from "../Components/Overlay";
 import { DataContext } from "../context/DataProvider";
 
-//<--Academics page
 function Acads() {
   const { account } = useContext(DataContext);
   const [academicEvents, setAcademicEvents] = useState([]);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
-  const { RangePicker } = DatePicker;
-  const { TextArea } = Input;
-  const today = dayjs();
-  const format = "YYYY-MM-DD HH:mm";
+  const toggleOverlay = () => {
+    setIsOverlayOpen(!isOverlayOpen);
+  };
 
-  function CardAcads(props) {
-    return (
-      <div className="card-acads">
-        <div className="card-acad-title">
-          <h2>{props.courseno}</h2>
-          <h2>{props.time}</h2>
-        </div>
+  useEffect(() => {
+    const fetchAcademicEvents = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/acads");
+        setAcademicEvents(response.data);
+      } catch (error) {
+        console.error("Error fetching academic events:", error);
+      }
+    };
 
-        <h2 style={{ textAlign: "right" }}>{props.date}</h2>
-        <h2>{props.location}</h2>
-        <p>{props.desc}</p>
-      </div>
-    );
-  }
+    fetchAcademicEvents();
+  }, []);
+
+  const classes = academicEvents.filter(
+    (event) => event.class_assignment === "class"
+  );
+  const assignments = academicEvents.filter(
+    (event) => event.class_assignment === "assignment"
+  );
 
   const onFinish = async (e) => {
     e.bothtime = e.bothtime.map((time) => time.toISOString());
@@ -40,10 +44,12 @@ function Acads() {
     e.enddate = e.bothtime[1];
     e.classname = account.classname;
     delete e.bothtime;
+
     try {
-      const response = await axios.post("http://localhost:8000/acads", e);
+      await axios.post("http://localhost:8000/acads", e);
       toggleOverlay();
       window.alert("Event Created");
+      setAcademicEvents((prevEvents) => [...prevEvents, e]); // Optionally, add the new event locally
     } catch (error) {
       console.error("Error creating academic event:", error);
       window.alert("Error creating event");
@@ -53,25 +59,34 @@ function Acads() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  function CardAcads(props) {
+    const formattedDate = dayjs(props.date).format("MMM D, YYYY");
+    const formattedTime = dayjs(props.time).format("h:mm A");
+
+    return (
+      <div className="card-acads">
+        <div className="card-acad-title">
+          <h2>{props.courseno}</h2>
+          <h2>{formattedTime}</h2>
+        </div>
+        <h2 style={{ textAlign: "right" }}>{formattedDate}</h2>
+        <h2>{props.location}</h2>
+        <p>{props.desc}</p>
+      </div>
+    );
+  }
+
   function AddClassAssignment() {
     return (
       <div className="create-event-container">
         <h2>Schedule</h2>
-
         <Form
           name="basic"
-          labelCol={{
-            span: 5,
-          }}
-          wrapperCol={{
-            span: 22,
-          }}
-          style={{
-            maxWidth: 600,
-          }}
-          initialValues={{
-            remember: true,
-          }}
+          labelCol={{ span: 5 }}
+          wrapperCol={{ span: 22 }}
+          style={{ maxWidth: 600 }}
+          initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
@@ -79,12 +94,7 @@ function Acads() {
           <Form.Item
             label="Class/Assignment"
             name="class_assignment"
-            rules={[
-              {
-                required: true,
-                message: "choose Class/Assignment!",
-              },
-            ]}
+            rules={[{ required: true, message: "Choose Class/Assignment!" }]}
           >
             <Radio.Group>
               <Radio value="class"> Class </Radio>
@@ -94,61 +104,35 @@ function Acads() {
           <Form.Item
             label="Course No."
             name="courseno"
-            rules={[
-              {
-                required: true,
-                message: "Enter the Course No.!",
-              },
-            ]}
+            rules={[{ required: true, message: "Enter the Course No.!" }]}
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             label="RangePicker"
             name="bothtime"
-            rules={[
-              {
-                required: true,
-                message: "Enter Date and Time!",
-              },
-            ]}
+            rules={[{ required: true, message: "Enter Date and Time!" }]}
           >
-            <RangePicker
-              showTime={{
-                format: "HH:mm",
-              }}
-              minDate={dayjs(today, { format })}
-              format={format}
-              label="Date and Time"
+            <DatePicker.RangePicker
+              showTime={{ format: "HH:mm" }}
+              minDate={dayjs()}
+              format="YYYY-MM-DD HH:mm"
             />
           </Form.Item>
           <Form.Item
             label="Location"
             name="location"
-            rules={[
-              {
-                required: true,
-                message: "Enter Location!",
-              },
-            ]}
+            rules={[{ required: true, message: "Enter Location!" }]}
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             label="Description"
             name="description"
-            rules={[
-              {
-                required: true,
-                message: "Enter Description!",
-              },
-            ]}
+            rules={[{ required: true, message: "Enter Description!" }]}
           >
-            <TextArea required rows={4} />
+            <Input.TextArea rows={4} />
           </Form.Item>
-
           <Form.Item>
             <Button htmlType="submit">Create</Button>
           </Form.Item>
@@ -156,11 +140,7 @@ function Acads() {
       </div>
     );
   }
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
-  const toggleOverlay = () => {
-    setIsOverlayOpen(!isOverlayOpen);
-  };
   return (
     <div className="page-container">
       <div className="sidebar-container">
@@ -168,95 +148,49 @@ function Acads() {
       </div>
       <div className="main-content">
         <h1>Academics</h1>
+
+        {/* Display Classes */}
         <div className="section">
           <div className="section-container">
             <h3>Upcoming Classes</h3>
             <div className="cards-container">
-              {/*u need to get data from backend for this stuff*/}
-
-              <CardAcads
-                courseno="CS 123"
-                time="8:00 AM"
-                date="Oct 30, 2024"
-                location="Room 101"
-                desc="Introduction to Computer Science"
-              />
-              <CardAcads
-                courseno="CS 124"
-                time="9:00 AM"
-                date="Oct 30, 2024"
-                location="Room 102"
-                desc="Data Structures and Algorithms"
-              />
-              <CardAcads
-                courseno="CS 125"
-                time="10:00 AM"
-                date="Oct 30, 2024"
-                location="Room 103"
-                desc="Operating Systems"
-              />
-              <CardAcads
-                courseno="CS 126"
-                time="11:00 AM"
-                date="Oct 30, 2024"
-                location="Room 104"
-                desc="Software Engineering"
-              />
-              <CardAcads
-                courseno="CS 127"
-                time="12:00 PM"
-                date="Oct 30, 2024"
-                location="Room 105"
-                desc="Database Management Systems"
-              />
+              {classes.map((event, index) => (
+                <CardAcads
+                  key={index}
+                  courseno={event.courseno}
+                  time={event.startdate}
+                  date={event.startdate}
+                  location={event.location}
+                  desc={event.description}
+                />
+              ))}
             </div>
           </div>
         </div>
+
+        {/* Add Class/Assignment Button */}
         <div style={{ textAlign: "center", margin: "10px" }}>
           <Button onClick={toggleOverlay}>Add Class/Assignments</Button>
           <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
             <AddClassAssignment />
           </Overlay>
         </div>
+
+        {/* Display Assignments */}
         <div className="section">
           <div className="section-container">
             <h3>Assignments</h3>
             <div className="cards-container">
-              <CardAcads
-                courseno="CS 123"
-                time="8:00 AM"
-                date="Oct 30, 2024"
-                location="Room 101"
-                desc="Introduction to Computer Science"
-              />
-              <CardAcads
-                courseno="CS 124"
-                time="9:00 AM"
-                date="Oct 30, 2024"
-                location="Room 102"
-                desc="Data Structures and Algorithms"
-              />
-              <CardAcads
-                courseno="CS 125"
-                time="10:00 AM"
-                date="Oct 30, 2024"
-                location="Room 103"
-                desc="Operating Systems"
-              />
-              <CardAcads
-                courseno="CS 126"
-                time="11:00 AM"
-                date="Oct 30, 2024"
-                location="Room 104"
-                desc="Software Engineering"
-              />
-              <CardAcads
-                courseno="CS 127"
-                time="12:00 PM"
-                date="Oct 30, 2024"
-                location="Room 105"
-                desc="Database Management Systems"
-              />
+              {assignments.map((event, index) => (
+                <CardAcads
+                  key={index}
+                  courseno={event.courseno}
+                  time={event.startdate}
+                  date={event.startdate}
+                  location={event.location}
+                  desc={event.description}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -267,4 +201,5 @@ function Acads() {
     </div>
   );
 }
+
 export default Acads;

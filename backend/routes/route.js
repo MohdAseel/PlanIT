@@ -18,6 +18,7 @@ const {
   getStarredClubs,
   getLatestEvents,
   getEventById,
+  getAcademicEvents,
 } = require("../controller/eventCon.js");
 
 // User routes
@@ -27,6 +28,7 @@ router.post("/login", loginValidation, loginUser);
 // Event routes
 router.post("/personalevents", createPersonalEvent);
 router.post("/acads", createClassEvent);
+router.get("/acads", getAcademicEvents);
 router.get("/api/getEventIds", getEventIdsByEmail);
 router.post("/api/getEventDetails", getEventDetailsByIds);
 
