@@ -136,7 +136,7 @@ function LoginPage({ isUserAuthenticated }) {
                 >
                   <Input
                     prefix={<MailOutlined />}
-                    placeholder="rolln@smail.iitm.ac.in"
+                    placeholder="rollno@smail.iitm.ac.in"
                   />
                 </Form.Item>
                 <Form.Item

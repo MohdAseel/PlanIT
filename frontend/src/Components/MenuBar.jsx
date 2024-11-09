@@ -3,38 +3,59 @@ import { Link } from "react-router-dom";
 import Overlay from "./Overlay";
 import CreatePersonalEvent from "./CreatePersonalEvent";
 import CheckboxMenu from "./CheckBoxMenu";
+import ProfilePictureOverlay from "./ProfilePictureOverlay";
 import { Input } from "antd";
 
 import "./components.css";
 
 const MenuBar = ({ onCheckboxChange, currentPage }) => {
+  // State for managing overlay visibility
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isProfileOverlayOpen, setIsProfileOverlayOpen] = useState(false);
 
+  // Toggle the overlay visibility
   const toggleOverlay = () => {
     setIsOverlayOpen(!isOverlayOpen);
+    setIsProfileOverlayOpen(false); // Close profile overlay when creating a personal event
   };
 
-  const onCheckboxChangeMenu = (selection) => {
-    onCheckboxChange(selection); // Call the onCheckboxChange function passed from the parent
+  // Toggle the profile picture overlay visibility
+  const toggleProfileOverlay = () => {
+    setIsProfileOverlayOpen(!isProfileOverlayOpen);
+    setIsOverlayOpen(false); // Close create personal event overlay when viewing profile picture
+  };
+
+  // Handles checkbox changes, passed to CheckBoxMenu component
+  const handleCheckboxChangeMenu = (selection) => {
+    if (onCheckboxChange) {
+      onCheckboxChange(selection); // Call the onCheckboxChange passed from the parent component
+    }
   };
 
   return (
     <div className="MenuBar">
       <ul>
+        {/* Profile picture icon with toggleable overlay */}
         <li>
-          <Link to={"/profile"}>
-            <img
-              src="../../photos/icons_menu_bar/ic--round-account-box.svg"
-              alt="profile"
-              //overlay for account
+          <img
+            src="../../photos/icons_menu_bar/ic--round-account-box.svg"
+            alt="profile"
+            onClick={toggleProfileOverlay}
+            style={{ cursor: "pointer" }}
+          />
+          <Overlay isOpen={isProfileOverlayOpen} onClose={toggleProfileOverlay}>
+            <ProfilePictureOverlay
+              isOpen={isProfileOverlayOpen}
+              onClose={toggleProfileOverlay}
             />
-          </Link>
+          </Overlay>
         </li>
-        {/* if its montview we dont want the link for it  */}
-        {currentPage === "monthview" ? (
+
+        {/* Navigation for different views based on currentPage */}
+        {currentPage === "monthview" && (
           <>
             <li>
-              <Link to={"/weekview"}>
+              <Link to="/weekview">
                 <img
                   src="../../photos/icons_menu_bar/material-symbols--view-week.svg"
                   alt="weekview"
@@ -42,7 +63,7 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
               </Link>
             </li>
             <li>
-              <Link to={"/dayview"}>
+              <Link to="/dayview">
                 <img
                   src="../../photos/icons_menu_bar/material-symbols--view-day.svg"
                   alt="dayview"
@@ -50,11 +71,12 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
               </Link>
             </li>
           </>
-        ) : null}
-        {currentPage === "weekview" ? (
+        )}
+
+        {currentPage === "weekview" && (
           <>
             <li>
-              <Link to={"/monthview"}>
+              <Link to="/monthview">
                 <img
                   src="../../photos/icons_menu_bar/material-symbols-light--calendar-view-month.svg"
                   alt="monthview"
@@ -62,7 +84,7 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
               </Link>
             </li>
             <li>
-              <Link to={"/dayview"}>
+              <Link to="/dayview">
                 <img
                   src="../../photos/icons_menu_bar/material-symbols--view-day.svg"
                   alt="dayview"
@@ -70,11 +92,12 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
               </Link>
             </li>
           </>
-        ) : null}
-        {currentPage === "dayview" ? (
+        )}
+
+        {currentPage === "dayview" && (
           <>
             <li>
-              <Link to={"/monthview"}>
+              <Link to="/monthview">
                 <img
                   src="../../photos/icons_menu_bar/material-symbols-light--calendar-view-month.svg"
                   alt="monthview"
@@ -82,7 +105,7 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
               </Link>
             </li>
             <li>
-              <Link to={"/weekview"}>
+              <Link to="/weekview">
                 <img
                   src="../../photos/icons_menu_bar/material-symbols--view-week.svg"
                   alt="weekview"
@@ -90,10 +113,12 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
               </Link>
             </li>
           </>
-        ) : null}
-        {currentPage === "monthview" ||
-        currentPage === "dayview" ||
-        currentPage === "weekview" ? (
+        )}
+
+        {/* Render options if on a valid view page */}
+        {(currentPage === "monthview" ||
+          currentPage === "weekview" ||
+          currentPage === "dayview") && (
           <>
             <li>
               <img
@@ -125,14 +150,17 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
                   "Sports",
                   "Academics",
                 ]}
-                onChange={onCheckboxChangeMenu} // Pass the onCheckboxChangeMenu function
+                onChange={handleCheckboxChangeMenu} // Pass the function to handle checkbox change
               />
             </li>
           </>
-        ) : (
+        )}
+
+        {/* Render navigation links if not on a valid view page */}
+        {!["monthview", "weekview", "dayview"].includes(currentPage) && (
           <>
             <li>
-              <Link to={"/dayview"}>
+              <Link to="/dayview">
                 <img
                   src="../../photos/icons_menu_bar/material-symbols--view-day.svg"
                   alt="dayview"
@@ -140,7 +168,7 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
               </Link>
             </li>
             <li>
-              <Link to={"/weekview"}>
+              <Link to="/weekview">
                 <img
                   src="../../photos/icons_menu_bar/material-symbols--view-week.svg"
                   alt="weekview"
@@ -148,7 +176,7 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
               </Link>
             </li>
             <li>
-              <Link to={"/monthview"}>
+              <Link to="/monthview">
                 <img
                   src="../../photos/icons_menu_bar/material-symbols-light--calendar-view-month.svg"
                   alt="monthview"
@@ -157,13 +185,13 @@ const MenuBar = ({ onCheckboxChange, currentPage }) => {
             </li>
           </>
         )}
-        <li></li>
       </ul>
     </div>
   );
 };
 
 export default MenuBar;
+
 
 /**
  * so now menubar is going to get props

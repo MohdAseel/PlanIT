@@ -150,8 +150,8 @@ const Pagedata = [
         title: "Cultural Clubs",
         data: [
           {
-            title: "club 1",
-            link: "/club-1",
+            title: "Informals Club",
+            link: "/CIFC",
           },
           {
             title: "club 2",

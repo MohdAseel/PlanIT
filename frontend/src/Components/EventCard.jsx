@@ -1,28 +1,32 @@
-import { React, useState } from "react";
-import EventData from "./EventData";
-import "./components.css";
+// EventCard.jsx
+import { React, useState ,useContext } from "react";
+import {DataContext} from "../context/DataProvider";
 import EventCardExpanded from "./EventCardExpanded";
 import Overlay from "./Overlay";
+import "./components.css";
+import axios from "axios"; // Import axios for HTTP requests
 
 function EventCard(props) {
-  //props will have return an object with
-  //event id is clubid +4numbers
-  //fetch event data from eventid from EventData
-  //as backend isnt setupped we create temporary setup
-
-  //   id: "TAIC0001",
-  //   title: "AI Club starter event",
-  //   date: "2021-10-10",
-  //   time: "10:00",
-  //   location: "CLT",
-  //   description: "This is the first event of the AI Club of IIT Madras",
-  //   image: "../../photos/images.png",
   const data = props.data;
-
+ const {account} = useContext(DataContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOverlay = () => {
     setIsOpen(!isOpen);
+  };
+
+  const addEvent = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/user/addEvent", {
+        email: account.email,
+        eventId: data.eventId,
+      });
+      console.log(response.data); // Log server response
+      alert("Event added successfully!");
+    } catch (error) {
+      console.error("Error adding event:", error);
+      alert("Failed to add event.");
+    }
   };
 
   return (
@@ -38,7 +42,7 @@ function EventCard(props) {
         <p className="event-location">location: {data.location}</p>
         <p className="event-description">{data.description}</p>
         <div className="dual-botton-container">
-          <button className="btn-left">Add Event</button>
+          <button className="btn-left" onClick={addEvent}>Add Event</button>
           <button className="btn-right" onClick={toggleOverlay}>
             Learn More
           </button>

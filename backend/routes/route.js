@@ -13,24 +13,43 @@ const {
   createPersonalEvent,
   getEventIdsByEmail,
   getEventDetailsByIds,
+  addEvent,
+  starClub,
+  getStarredClubs,
+  getLatestEvents,
+  getEventById,
 } = require("../controller/eventCon.js");
 
+// User routes
 router.post("/signup", signupValidation, signupUser);
 router.post("/login", loginValidation, loginUser);
+
+// Event routes
 router.post("/personalevents", createPersonalEvent);
 router.post("/acads", createClassEvent);
 
-router.get("/api/getEventIds", getEventIdsByEmail);
-router.post("/api/getEventDetails", getEventDetailsByIds);
 // router.get("/", getAllEvents);
 
-router.get("/:clubId", getEventByClubId);
+// Handle POST request to add events to the databas
+router.post("/user/addEvent", addEvent); // Add route for adding an event to a user
+
+// **Reordered Event Retrieval Routes**
+// Ensure specific routes are defined before generic ones to prevent conflicts
+
+// Starred Clubs Retrieval (More Specific)
+router.get("/starred-clubs/:email", getStarredClubs);
+
+// Latest Events Retrieval
+router.get("/latest-events", getLatestEvents);
+
+// Single Event Retrieval
+router.get("/event/:eventId", getEventById);
+
+router.post("/star-club", routevalidation, starClub);
+// Generic Club Events Retrieval
 
 // Handle POST request to add events to the database
+router.get("/:clubId", getEventByClubId);
 router.post("/:clubId", createEvent);
-
-// router.put("/:id", updateEvent);
-
-// router.delete("/:id", deleteEvent);
 
 module.exports = router;

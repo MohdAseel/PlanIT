@@ -232,6 +232,36 @@ body {
     color: #555;
 }   
 
+/* src/Pages/EventDetail.css */
+
+.event-detail {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .event-detail h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .event-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .event-detail p {
+    font-size: 1.1em;
+    margin: 10px 0;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+
 .event-card-expanded-splitter {
     display: flex;
     justify-content: space-between;
@@ -248,6 +278,60 @@ body {
     flex: 1;
 }
 
+/* components.css */
+
+.event-details-overlay {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* components.css */
+
+.event-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+
+.event-button:hover {
+  color: #0056b3;
+}
+
+.overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.overlay-body img.event-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.overlay-body p {
+  margin: 8px 0;
+}
 
 .overlay-background {
     background-color: rgba(0, 0, 0, 0.5);
@@ -346,3 +430,43 @@ body {
     width: 40%;
 }
 
+.profile-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .profile-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .profile-overlay-content {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .view-profile-btn {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .view-profile-btn:hover {
+    background-color: #45a049;
+  }
