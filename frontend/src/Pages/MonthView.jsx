@@ -1,32 +1,58 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { DataContext } from "../context/DataProvider"; 
+import React, { useEffect, useState, useContext, Suspense } from "react";
+
+import { DataContext } from "../context/DataProvider";
 import SideBar from "../Components/Sidebar";
 import MenuBar from "../Components/MenuBar";
-import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
-import { createViewMonthGrid } from "@schedule-x/calendar";
-import { createEventsServicePlugin } from "@schedule-x/events-service";
-import "@schedule-x/theme-default/dist/index.css";
 import "./pagestyle/calendarpagestyle.css";
 import "./pagestyle/pagestyle.css";
+import axios from "axios";
+import dayjs from "dayjs";
 
+import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
+import { createViewMonthGrid } from "@schedule-x/calendar";
+
+function Calendar(props) {
+  const value = JSON.parse(JSON.stringify(props.eventData));
+  // Assuming eventData is an array of events
+
+  const createNewCalendar = () => {
+    return useCalendarApp({
+      views: [createViewMonthGrid()],
+      events: value.map((event) => ({
+        id: event.eventId,
+        title: event.title,
+        start: dayjs(event.startdate).format("YYYY-MM-DD HH:mm"),
+        end: dayjs(event.enddate).format("YYYY-MM-DD HH:mm"),
+      })),
+    });
+  };
+
+  return <ScheduleXCalendar calendarApp={createNewCalendar(props)} />;
+}
 
 function MonthView() {
   const { account } = useContext(DataContext); // Get user account info
-  const navigate = useNavigate();
+
+  const [eventData, setEventData] = useState();
   const [eventIds, setEventIds] = useState([]);
-  const [eventData, setEventData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [personalEvents, setPersonalEvents] = useState([]);
 
   // Fetch event IDs for the logged-in user
   const fetchEventIds = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/getEventIdsByEmail?email=${account.email}`
+      const response = await axios.get(
+        `http://localhost:8000/api/getEventIds?email=${account.email}`
       );
-      const data = await response.json();
 
-      if (response.ok) {
-        setEventIds(data.eventIds); // Set event IDs to state
+      const data = response.data;
+
+      if (response.status === 200) {
+        setEventIds(data.eventIds);
+
+        setPersonalEvents(data.personal_events); // Set event IDs to state
       } else {
         console.error("Error fetching event IDs:", data.message);
       }
@@ -35,30 +61,29 @@ function MonthView() {
     }
   };
 
+  console.log(eventIds);
   // Fetch event details by event IDs
   const fetchEventDetails = async () => {
-    try {
-      if (eventIds.length === 0) return; // Don't proceed if there are no event IDs
+    if (eventIds.length === 0) return; // Don't proceed if there are no event IDs
 
-      const response = await fetch(
-        `http://localhost:8000/api/getEventDetailsByIds?eventIds=${eventIds.join(",")}`
-      );
-      const data = await response.json();
-
-      if (response.ok) {
-        setEventData(data); // Set event details to state
-      } else {
-        console.error("Error fetching event data:", data.message);
-      }
-    } catch (err) {
-      console.error("Error:", err);
-    }
+    const values = { eventIds };
+    const response = await axios
+      .post("http://localhost:8000/api/getEventDetails", values)
+      .then((response) => {
+        setEventData([...response.data, ...personalEvents]);
+        setLoading(false); // Set event details to state
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+        console.error("Error fetching event data:", error);
+      });
   };
 
   // Use Effect to fetch event IDs and event details
   useEffect(() => {
     if (account && account.email) {
-      fetchEventIds(); // Fetch event IDs based on the user's email
+      fetchEventIds(); // Fetch event IDs for the logged-in user
     }
   }, [account]);
 
@@ -69,15 +94,26 @@ function MonthView() {
   }, [eventIds]);
 
   // Calendar configuration
-  const calendar = useCalendarApp({
-    views: [createViewMonthGrid()],
-    events: eventData.map((event) => ({
-      id: event.eventId,
-      title: event.title,
-      start: event.startdate,
-      end: event.enddate,
-    })),
-  });
+  // const calendar = useCalendarApp({
+  //   views: [createViewMonthGrid()],
+  //   events: [
+  //     {
+  //       id: "1asws",
+  //       title: "Event 1",
+  //       start: "2024-11-27 00:00",
+  //       end: "2024-11-27 00:30",
+  //     },
+  //   ],
+  // });
+
+  // Handle loading state while eventData is not yet fetched
+  if (!eventData) {
+    return <div>Loading event data...</div>;
+  }
+
+  // Handle case where calendar is not yet created
+
+  console.log(eventData); // This triggers a re-render with new data
 
   return (
     <div className="page-container">
@@ -85,8 +121,9 @@ function MonthView() {
         <SideBar />
       </div>
       <div className="main-content">
-        <h1>Scheduled Events</h1>
-        <ScheduleXCalendar calendarApp={calendar} />
+        <Suspense fallback={<div>Loading...</div>} />
+        <Calendar eventData={eventData} />
+        <Suspense />
       </div>
       <div className="menubar-container">
         <MenuBar currentPage={"monthview"} />

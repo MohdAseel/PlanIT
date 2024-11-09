@@ -117,17 +117,6 @@ const createPersonalEvent = async (req, res) => {
 };
 
 // Get all events
-const getAllEvents = async (req, res) => {
-  try {
-    const events = await Event.find();
-    res.json(events);
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
-  }
-};
-
 // Get a single event by ID
 const getEventByClubId = async (req, res) => {
   try {
@@ -140,6 +129,17 @@ const getEventByClubId = async (req, res) => {
     res.json(events);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+
+const getAllEvents = async (req, res) => {
+  try {
+    const events = await Event.find();
+    res.json(events);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
   }
 };
 
@@ -191,9 +191,82 @@ const deleteEvent = async (req, res) => {
   }
 };
 
+const getEventDetailsByIds = async (req, res) => {
+  try {
+    let { eventIds } = req.body; // Extract event IDs from query string
+
+    if (!eventIds) {
+      return res.status(400).json({ message: "No event IDs provided" });
+    }
+    let eventDetails = []; // Array to store event details
+    // Loop through each event ID
+    for (const eventId of eventIds) {
+      const clubId = eventId.substring(0, 4); // Get the first 4 characters as clubId
+
+      try {
+        // Dynamically define the EventModal for the specific club collection
+        const EventModal = mongoose.model(clubId, eventSchema, clubId);
+
+        // Fetch event details based on the event ID for this club's collection
+        const event = await EventModal.findOne({ eventId: eventId });
+
+        if (event) {
+          eventDetails.push(event); // Add the event to the result array if found
+        } else {
+          console.warn(
+            `Event not found for event ID: ${eventId} in club ${clubId}`
+          );
+        }
+      } catch (err) {
+        console.error(
+          `Error fetching event with ID ${eventId} from club ${clubId}:`,
+          err
+        );
+        continue; // Continue with other event IDs in case of error
+      }
+    }
+
+    if (eventDetails.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No events found for the provided IDs" });
+    }
+
+    // Send the event details as the response
+    res.status(200).json(eventDetails);
+  } catch (err) {
+    console.error("Error fetching event details:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Controller to fetch event IDs based on email
+const getEventIdsByEmail = async (req, res) => {
+  try {
+    // Retrieve the user's email from query params
+    const email = req.query.email;
+    console.log(email);
+
+    const user = await User.findOne({ email }); // Find the user by email
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    // Return the event IDs stored in the user's Scheduled_events
+    const eventIds = user.scheduled_events;
+    const personal_events = user.personal_events;
+
+    res.status(200).json({ eventIds, personal_events });
+  } catch (err) {
+    console.error("Error fetching event IDs:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 module.exports = {
   createEvent,
   createClassEvent,
   getEventByClubId,
   createPersonalEvent,
+  getEventDetailsByIds,
+  getEventIdsByEmail,
 };

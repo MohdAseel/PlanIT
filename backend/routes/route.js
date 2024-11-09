@@ -11,18 +11,17 @@ const {
   createClassEvent,
   getEventByClubId,
   createPersonalEvent,
+  getEventIdsByEmail,
+  getEventDetailsByIds,
 } = require("../controller/eventCon.js");
-
-// const { getEventIdsByEmail} = require("../controller/scheduled_events_con");// Import controller
-
-// const { getEventIdsByEmail } = require("../controller/user-controller.js"); // Import controller
-// const { getEventDetailsByIds } = require("../controller/scheduled_events_con");
 
 router.post("/signup", signupValidation, signupUser);
 router.post("/login", loginValidation, loginUser);
 router.post("/personalevents", createPersonalEvent);
 router.post("/acads", createClassEvent);
 
+router.get("/api/getEventIds", getEventIdsByEmail);
+router.post("/api/getEventDetails", getEventDetailsByIds);
 // router.get("/", getAllEvents);
 
 router.get("/:clubId", getEventByClubId);
