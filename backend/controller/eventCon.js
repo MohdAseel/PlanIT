@@ -151,10 +151,10 @@ const getEventDetailsByIds = async (req, res) => {
 
         // Fetch event details based on the event ID for this club's collection
         const event = await EventModal.findOne({ eventId: eventId });
-
         if (event) {
           eventDetails.push(event); // Add the event to the result array if found
         } else {
+          console.log("working");
           console.warn(
             `Event not found for event ID: ${eventId} in club ${clubId}`
           );

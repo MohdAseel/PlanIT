@@ -170,10 +170,14 @@ function Acads() {
 
         {/* Add Class/Assignment Button */}
         <div style={{ textAlign: "center", margin: "10px" }}>
-          <Button onClick={toggleOverlay}>Add Class/Assignments</Button>
-          <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
-            <AddClassAssignment />
-          </Overlay>
+          {account.role === "admin" ? (
+            <>
+              <Button onClick={toggleOverlay}>Add Class/Assignments</Button>
+              <Overlay isOpen={isOverlayOpen} onClose={toggleOverlay}>
+                <AddClassAssignment />
+              </Overlay>
+            </>
+          ) : null}
         </div>
 
         {/* Display Assignments */}
