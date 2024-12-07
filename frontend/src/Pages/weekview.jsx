@@ -90,6 +90,12 @@ function WeekView() {
     if (eventIds.length > 0) {
       fetchEventDetails(); // Fetch event details if event IDs are available
     }
+  }, [account]);
+
+  useEffect(() => {
+    if (eventIds.length > 0) {
+      fetchEventDetails(); // Fetch event details if event IDs are available
+    }
   }, [eventIds]);
 
   if (!eventData) {
@@ -98,11 +104,7 @@ function WeekView() {
 
   // Handle case where calendar is not yet created
 
-  console.log(eventData); // This triggers a re-render with new data
-
-  // const handleCheckboxChange = (selection) => {
-  //   console.log("Selected categories:", selection);
-  // };
+  console.log(eventData);
 
   return (
     <div className="page-container">
